@@ -1,0 +1,388 @@
+var(--primary-color): #333;
+var(--secondary-color): #f4f4f4;
+$hover-color: #ff9800;
+var(--accent-color): #ff9800;
+$footer-bg: #222;
+$footer-text: #ddd;
+$layout-bg: #fff;
+$mobile-breakpoint: 768px;
+
+// Base Styles - Typography and layout
+
+body {
+    margin: 0;
+    font-family: sans-serif; // Define a default font-family
+    color: var(--primary-color); // Default text color
+    line-height: 1.6; // Improved readability
+}
+
+h1, h2, h3 { // Style all heading levels
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-bottom: 1rem; // Consistent margin for headings
+}
+
+h1 {
+    font-size: 2.5rem; // Default h1 size
+}
+
+p {
+  margin-bottom: 1rem; // Consistent margin for paragraphs
+}
+
+
+.public-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: $layout-bg;
+
+    .main-content {
+        flex-grow: 1;
+        margin-top: 3rem;
+    }
+}
+
+// // Navbar
+// .navbar {
+//     background: var(--primary-color);
+//     padding: 1rem 2rem;
+//     .nav-links {
+//         list-style: none;
+//         display: flex;
+//         justify-content: center;
+//         gap: 1.5rem;
+
+//         li {
+//             a {
+//                 text-decoration: none;
+//                 color: var(--secondary-color);
+//                 font-size: 1.2rem;
+//                 font-weight: bold;
+//                 transition: color 0.3s ease;
+
+//                 &:hover {
+//                     color: $hover-color;
+//                 }
+//             }
+//         }
+
+//         @media (max-width: $mobile-breakpoint) {
+//             flex-direction: column;
+//             align-items: center;
+//             gap: 1rem;
+//         }
+//     }
+// }
+
+
+// Home Page
+.home-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background: var(--secondary-color);
+
+    .main-section {
+        max-width: 1200px;
+        text-align: center;
+    }
+
+    .banner-section {
+        margin-bottom: 2rem;
+
+        h1 { // uses the default h1 style now
+        }
+
+        p {
+            color: darken(var(--primary-color), 20%);
+        }
+
+        .banner-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    .cta-section {
+        .cta-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent-color);
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+
+            &:hover {
+                background: darken(var(--accent-color), 10%);
+            }
+        }
+    }
+
+    @media (max-width: $mobile-breakpoint) {
+        .main-section {
+            padding: 1rem;
+        }
+        .banner-section h1 {
+            font-size: 2rem;
+        }
+        .cta-button {
+            font-size: 1rem;
+        }
+    }
+}
+
+// Client Page
+.client-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background: var(--secondary-color);
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        max-width: 400px;
+        background: #fff;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    input {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+  
+    .react-datepicker {
+      width: 100%;
+      font-size: 1rem;
+    }
+  
+    button {
+      background: var(--accent-color);
+      color: #fff;
+      border: none;
+      padding: 0.75rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s;
+  
+      &:hover {
+        background: darken(var(--accent-color), 10%);
+      }
+  
+      &:disabled {
+        background: gray;
+        cursor: not-allowed;
+      }
+    }
+  
+    .error-message {
+      color: red;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+  
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .modal {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    @media (max-width: $mobile-breakpoint) {
+      form {
+        width: 90%;
+        padding: 1rem;
+      }
+    }
+}
+
+// Contact Page
+.contact-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background: var(--secondary-color);
+   
+    p {
+        color: darken(var(--primary-color), 20%);
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+  
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 600px;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+  
+        input,
+        textarea {
+          padding: 0.75rem;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 1rem;
+          transition: border-color 0.3s ease;
+  
+          &:focus {
+            border-color: var(--accent-color);
+            outline: none;
+          }
+        }
+  
+        textarea {
+          resize: vertical;
+          min-height: 30px;
+        }
+      }
+  
+      .submit-button {
+        background: var(--accent-color);
+        color: #fff;
+        border: none;
+        padding: 0.75rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+  
+        &:hover {
+          background: darken(var(--accent-color), 10%);
+        }
+      }
+    }
+  
+    @media (max-width: $mobile-breakpoint) {
+      padding: 1rem;
+  
+      h1 {
+        font-size: 2rem;
+      }
+  
+      p {
+        font-size: 1rem;
+      }
+  
+      .contact-form {
+        padding: 1rem;
+  
+        .form-group {
+          label {
+            font-size: 1rem;
+          }
+  
+          input,
+          textarea {
+            font-size: 0.9rem;
+          }
+        }
+  
+        .submit-button {
+          font-size: 1rem;
+        }
+      }
+    }
+}
+
+.footer {
+    background: $footer-bg;
+    color: $footer-text;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+}
+
+/* AboutPage.css */
+.sobre-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background: var(--secondary-color);
+  margin: 0 auto;
+  text-align: justify;
+}
+.about-description{
+  max-width: 800px;
+}
+.sobre-page h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.sobre-page p {
+  font-size: 1.2rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.sobre-page h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.carousel {
+  margin-bottom: 30px;
+}
+
+.carousel img {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}
+
+.carousel-indicators li {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.carousel-indicators .active {
+  background-color: #000;
+}

@@ -1,0 +1,53 @@
+.auth-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+  
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: var(--accent-color);
+    }
+  
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+  
+    .google-sign-in-button {
+      @include flex-center;
+      background-color: var(--secondary-color);
+      color: var(--primary-color);
+      font-size: 1.1rem;
+      padding: 12px 20px;
+      border-radius: $border-radius;
+      border: none;
+      cursor: pointer;
+      @include box-shadow;
+      @include transition(all);
+  
+      &:hover {
+        background-color: var(--secondary-color);
+        transform: scale(1.05);
+      }
+  
+      &:active {
+        transform: scale(1);
+      }
+  
+      &::before {
+        content: "";
+        background-size: contain;
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+        display: inline-block;
+      }
+    }
+  }

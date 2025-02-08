@@ -1,0 +1,157 @@
+.appearance-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 2rem;
+    background: var(--secondary-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition-speed);
+}
+
+.appearance-container h2 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.appearance-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.appearance-form label {
+    font-weight: bold;
+    color: var(--dark-color);
+}
+
+.appearance-form input,
+.appearance-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--light-color);
+    border-radius: var(--border-radius);
+    background: var(--light-color);
+    color: var(--dark-color);
+    transition: var(--transition-speed);
+}
+
+.appearance-form input:focus,
+.appearance-form textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 5px var(--primary-color);
+}
+
+.appearance-form button {
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: var(--border-radius);
+    background: var(--primary-color);
+    color: var(--light-color);
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition-speed);
+}
+
+.appearance-form button:disabled {
+    background: var(--disabled-color);
+    cursor: not-allowed;
+}
+
+.appearance-form button:hover {
+    background: var(--dark-color);
+}
+
+.image-preview {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+
+.image-preview img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.image-preview .delete-btn {
+    background: var(--danger-color);
+    color: var(--light-color);
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: var(--transition-speed);
+}
+
+.image-preview .delete-btn:hover {
+    background: var(--dark-danger-color);
+}
+    
+.image-content{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.accordion-container{
+    border-radius: $border-radius;
+    background-color: var(--secondary-color);
+    box-shadow: $box-shadow;
+    transition: $transition-speed;
+    padding: 1rem;
+
+    .accordion-header{
+        .accordion-button{
+            color: var(--text-light-color);
+            background-color: var(--primary-color);
+            @include transition(background-color);
+            border-color: transparent;
+            box-shadow: none;
+            &:hover {
+                background-color: var(--accent-color);
+            }
+        }
+    }
+}
+
+.tema-config-main-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; 
+    /* O label do grupo */
+    > .form-label {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+      
+
+
+.tema-config-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem; /* Espaçamento entre os grupos de configuração */
+    padding: 1rem;
+    /* Estilos para os blocos de configuração */
+    .tema-config {
+      display: inline-block;
+      width: calc(20% - 1rem); /* Dois blocos por linha, com espaçamento */
+      background: var(--light-color);
+      padding: 0.75rem;
+      border: 1px solid var(--primary-color);
+      border-radius: $border-radius;
+      transition: $transition-speed;
+    }
+  
+  }
+  
+  /* Em telas menores, cada bloco ocupa toda a largura */
+  @media (max-width: 768px) {
+        .tema-config-container {
+            .tema-config {
+                width: 10rem;
+            }
+        }
+  }
+}

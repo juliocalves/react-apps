@@ -1,0 +1,16 @@
+@import 'variables';
+@import 'mixins';
+@import 'sidebar';
+@import 'admin-layout';
+@import 'auth-page';
+@import 'footer';
+@import 'header';
+@import 'reservas';
+@import 'aparencia';
+@import 'image-modal';
+p, span, h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color); /* Garantindo que todo texto seja claro */
+  }
+input{
+  box-shadow: none !important;
+}

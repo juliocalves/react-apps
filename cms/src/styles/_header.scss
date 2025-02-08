@@ -1,0 +1,50 @@
+.admin-header {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1rem;
+
+    h1 {
+      color: var(--primary-color);
+      margin-top: 0.3em;
+    }
+    
+    @media (max-width: 768px) {
+     
+        .user-info{
+        display: flex !important;
+        flex-direction: column !important;
+        }
+    }
+    .theme-toggle,
+    .logout-btn {
+    background: transparent;
+    color: var(--light-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: $border-radius;
+    @include transition(background-color);
+    
+    &:hover {
+        background: var(--primary-color);
+        }
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        
+        @media (max-width: 768px) {
+            flex-direction: row;
+            justify-content: center;
+        }
+        
+        .user-photo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+        }
+    }
+}
