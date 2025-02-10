@@ -2,9 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { FaSignOutAlt, FaHome, FaCalendarAlt, FaPalette } from "react-icons/fa";
-
-const HeaderCms = ({ user,theme, toggleTheme  }) => {
+import { FaSignOutAlt, FaBell } from "react-icons/fa";
+import { SiCraftcms } from "react-icons/si";
+import { IoFastFoodSharp } from "react-icons/io5";
+import { BsFillPersonVcardFill } from "react-icons/bs";
+import { RiTeamFill } from "react-icons/ri";
+const Header = ({ user,theme, toggleTheme  }) => {
   const { logout } = useAuth();
   const navigate = useNavigate();
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -52,28 +55,38 @@ const HeaderCms = ({ user,theme, toggleTheme  }) => {
           <ul className="navbar-nav me-auto">
             <li className="nav-item">
               <Link to="/cms" className="nav-link">
-                <FaHome className="nav-icon me-2" />
-                Dashboard
+              <SiCraftcms className="nav-icon me-2" />
+                CMS
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/cms/reservations" className="nav-link">
-                <FaCalendarAlt className="nav-icon me-2" />
-                Reservas
+              <Link to="/produtos" className="nav-link">
+                <IoFastFoodSharp className="nav-icon me-2" />
+                PRODUTOS
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/cms/appearance" className="nav-link">
-                <FaPalette className="nav-icon me-2" />
-                Aparência do Site
+              <Link to="/clientes" className="nav-link">
+              <BsFillPersonVcardFill className="nav-icon me-2" />
+                CLIENTES
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to="/equipe" className="nav-link">
+                <RiTeamFill className="nav-icon me-2" />
+                EQUIPE
+              </Link>
+            </li>
+           
           </ul>
          
           <div className="d-flex user-info">
             {user && <img src={user.photoURL} alt="User" className="user-photo" />}
             <button className="theme-toggle" onClick={toggleTheme}>
               {theme === "light" ? "🌙" : "☀️"}
+            </button>
+            <button className="alert-btn" >
+            <FaBell className="alert-icon" />
             </button>
             <button className="logout-btn" onClick={handleLogout}>
               <FaSignOutAlt className="logout-icon" />
@@ -85,4 +98,4 @@ const HeaderCms = ({ user,theme, toggleTheme  }) => {
   );
 };
 
-export default HeaderCms;
+export default Header;

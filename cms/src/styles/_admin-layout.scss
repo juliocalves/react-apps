@@ -9,6 +9,7 @@
       @media (max-width: 768px) { // Ajuste para telas menores
         flex-direction: column-reverse;
         padding: 3rem 1rem; // Ajuste de padding para melhor espaçamento
+        min-height: 105vh;
       }
   
       .admin-sidebar {

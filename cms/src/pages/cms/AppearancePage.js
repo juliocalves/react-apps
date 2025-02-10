@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { getPageContent, updatePageContent, updateIdentity, createIdentity, getIdentity } from "../services/firestore";
-import { deleteFile } from "../services/appwrite";
+import { getPageContent, updatePageContent, updateIdentity, createIdentity, getIdentity } from "../../services/firestore";
+import { deleteFile } from "../../services/appwrite";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Accordion from "../components/Accordion";
-import IdentidadeVisual from "../components/IdentidadeVisualConfig";
-import HomeConfig from "../components/HomeConfig";
-import AboutConfig from "../components/AboutConfig";
-import ContactConfig from "../components/ContactConfig";
-import ReservationsConfig from "../components/ReservationsConfig";
-import { uploadImg } from "../services/appwrite";
+import Accordion from "../../components/Accordion";
+import IdentidadeVisual from "../../components/cms/IdentidadeVisualConfig";
+import HomeConfig from "../../components/cms/HomeConfig";
+import AboutConfig from "../../components/cms/AboutConfig";
+import ContactConfig from "../../components/cms/ContactConfig";
+import ReservationsConfig from "../../components/cms/ReservationsConfig";
+import { uploadImg } from "../../services/appwrite";
 
 const AppearancePage = () => {
   const [pages, setPages] = useState({

@@ -1,7 +1,5 @@
 .admin-header {
-    margin-bottom: 2rem;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 1rem;
+   
 
     h1 {
       color: var(--primary-color);
@@ -16,7 +14,8 @@
         }
     }
     .theme-toggle,
-    .logout-btn {
+    .logout-btn,
+    .alert-btn {
     background: transparent;
     color: var(--light-color);
     border: none;
@@ -48,3 +47,25 @@
         }
     }
 }
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #ddd;
+  
+    h2 {
+      margin: 0;
+      color: var(--text-dark-color);
+    }
+  
+    .header-actions-buttons {
+      display: flex;
+      gap: 1rem;
+  
+      
+    }
+  }
+  

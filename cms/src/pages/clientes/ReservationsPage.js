@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllReservations, updateReservation, deleteReservation } from "../services/firestore";
+import { getAllReservations, updateReservation, deleteReservation } from "../../services/firestore";
 import { FaCheck, FaTrash } from "react-icons/fa";
 
 const ReservationsPage = () => {

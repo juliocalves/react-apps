@@ -1,5 +1,5 @@
 import React from "react";
-import ImageWithModal from "./ImageModal";
+import ImageWithModal from "../ImageModal";
 import { FaTrash } from "react-icons/fa";
 
 const AboutConfig = ({ about, handleChange, handleImageUpload, handleDeleteImage, isUploading, isSaving }) => {

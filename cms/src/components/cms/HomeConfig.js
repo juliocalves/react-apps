@@ -1,7 +1,7 @@
 import React from "react";
 import { FaTrash } from "react-icons/fa";
-import ImageWithModal from "./ImageModal";
-import Accordion from "./Accordion";
+import ImageWithModal from "../ImageModal";
+import Accordion from "../Accordion";
 
 const HomeConfig = ({ home, handleChange, handleImageUpload, handleDeleteImage, isUploading, isSaving }) => {
     return (

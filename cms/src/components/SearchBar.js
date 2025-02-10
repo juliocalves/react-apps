@@ -20,7 +20,7 @@ const SearchBar = ({ onSearch }) => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
-      <button className="btn btn-outline-success" type="submit">
+      <button className="btn btn-outline-primary" type="submit">
         <CiSearch />
       </button>
     </form>

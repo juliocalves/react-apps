@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllMessages, updateMessages, deleteMessages } from "../services/firestore";
+import { getAllMessages, updateMessages, deleteMessages } from "../../services/firestore";
 import { FaCheck, FaTrash } from "react-icons/fa";
 
 const MessagePage = () => {

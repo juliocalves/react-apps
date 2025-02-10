@@ -252,3 +252,71 @@ export const getLogo = async () => {
     return null;
   }
 };
+// 📌 Criar um novo produto no Firestore
+export const createProduto = async (produto) => {
+  try {
+    const docRef = await addDoc(collection(db, "products"), produto);
+    return { success: true, message: "Produto criado com sucesso!", id: docRef.id };
+  } catch (error) {
+    return { success: false, message: `Erro ao adicionar produto: ${error.message}` };
+  }
+};
+
+// 📌 Buscar todos os produtos
+export const getProdutos = async () => {
+  try {
+    const querySnapshot = await getDocs(collection(db, "products"));
+    if (querySnapshot.empty) {
+      return []; // Retorna um array vazio se não houver produtos
+    }
+    return querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+  } catch (error) {
+    console.error("Erro ao buscar produtos:", error);
+    return []; // Retorna um array vazio em caso de erro
+  }
+};
+
+
+// 📌 Atualizar um produto
+export const updateProduto = async (produtoId, updatedProduto) => {
+  try {
+    await updateDoc(doc(db, "products", produtoId), updatedProduto);
+    return { success: true, message: "Produto atualizado com sucesso!" };
+  } catch (error) {
+    return { success: false, message: `Erro ao atualizar produto: ${error.message}` };
+  }
+};
+
+// 📌 Excluir um produto
+export const deleteProduto = async (produtoId) => {
+  try {
+    await deleteDoc(doc(db, "products", produtoId));
+    return { success: true, message: "Produto excluído com sucesso!" };
+  } catch (error) {
+    return { success: false, message: `Erro ao excluir produto: ${error.message}` };
+  }
+};
+
+export const adicionarProduto = async (produto) => {
+  try {
+    const docRef = await addDoc(collection(db, "products"), produto);
+    return docRef.id;
+  } catch (error) {
+    console.error("Erro ao adicionar produto:", error);
+  }
+};
+
+// Buscar detalhes do produto por ID
+export const getProdutoById = async (id) => {
+  const docRef = doc(db, "products", id);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return { id: docSnap.id, ...docSnap.data() };
+  } else {
+    return null;
+  }
+};
