@@ -6,7 +6,6 @@ import Footer from "../components/Footer";
 import { auth } from "../services/firebase";
 import SideBar from "../components/SideBar";
 import { getIdentity } from "../services/firestore";
-import HeaderActions from "../components/HeaderActions";
 
 const Layout = ({ children, menuItens }) => {
   const [user, setUser] = useState(null);
@@ -78,19 +77,23 @@ const Layout = ({ children, menuItens }) => {
     fetchIdentity();
   }, []);
 
+  const handleActiveTab = location.pathname.split("/")[2];
 
 
   const handleTabChange = (tabId) => {
-    const basePath = location.pathname.startsWith("/produtos") ? "/produtos" : "/cms";
-    navigate(`${basePath}/${tabId}`); // Adiciona a rota dentro de /cms ou /produtos
-  };
+    const basePath = location.pathname.startsWith("/produtos") ? "/produtos" : 
+                     location.pathname.startsWith("/cms") ? "/cms" :
+                     location.pathname.startsWith("/clientes") ? "/clientes" : "/equipe"; // Add other base paths
 
+    navigate(`${basePath}/${tabId}`); // Correct: Absolute path from base
+  };
+ 
   return (
     <div className="admin-main">
       <div className="admin-container">
         <SideBar
           onTabChange={handleTabChange}
-          activeTab={location.pathname}
+          activeTab={handleActiveTab}
           logoUrl={identityConfig?.logoUrl}
           brandName={identityConfig?.brandName.toUpperCase()}
           menuItems={menuItens}

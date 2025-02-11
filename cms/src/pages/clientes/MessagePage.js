@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getAllMessages, updateMessages, deleteMessages } from "../../services/firestore";
 import { FaCheck, FaTrash } from "react-icons/fa";
-
+import HeaderActions from "../../components/HeaderActions";
+import Table from "../../components/Table";
 const MessagePage = () => {
   const [messages, setmessages] = useState([]);
 
@@ -26,20 +27,26 @@ const MessagePage = () => {
   };
 
   return (
-    <div className="cms-table-container">
-      <div className="table-responsive-sm"> {/* Bootstrap container and margin top */}
-        <table className="table table-hover cms-table"> 
-          <thead className="cms-table-header">
-            <tr>
+    <>
+    <HeaderActions
+        showSearch={true}
+        showFilter={false}
+        showAdd={false}
+        showChangeView={false}
+      />
+    <Table
+          tableHead={
+            <>
               <th scope="col">Status</th>
               <th scope="col">Nome</th> 
               <th scope="col">Email</th>
               <th scope="col">Mensagem</th>
               <th scope="col">Data</th>
               <th scope="col">Ações</th>
-            </tr>
-          </thead>
-          <tbody className="cms-table-body">
+            </>
+            }
+          tableBody={
+            <>
             {messages.map((res) => {
               if (!res.name || !res.email || !res.message) {
                 return null;
@@ -80,11 +87,10 @@ const MessagePage = () => {
                 </tr>
               );
             })}
-          </tbody>
-        </table>
-      </div>
-    </div>
-    
+            </>
+          }
+          />
+    </>
   );
 };
 

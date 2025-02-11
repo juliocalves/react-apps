@@ -5,7 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { FaArrowLeft, FaTrash, FaSave } from "react-icons/fa";
 import ImageWithModal from "../../components/ImageModal";
 import { uploadImg, deleteFile } from "../../services/appwrite";
-
+import { MdEdit, MdOutlineCancel } from "react-icons/md";
 const ProdutoDetailPage = () => {
   const { produtoId } = useParams();
   const [isUploading, setIsUploading] = useState(false);
@@ -203,21 +203,21 @@ const ProdutoDetailPage = () => {
         <div className="card-footer  d-flex justify-content-between">
           {editing ? (
             <button type="button" className="btn btn-primary" onClick={handleSave} disabled={isUploading}>
-              <FaSave /> Salvar Alterações
+              <FaSave /> Salvar
             </button>
             ) : (
                 <button type="button" className="btn btn-primary" onClick={() => setEditing(true)}>
-                ✏️ Editar Produto
+                <MdEdit/> Editar
                 </button>
             )}
             {editing ? (
                 <button type="button" className="btn btn-secondary" onClick={handleCancel} disabled={isUploading }>
-                <FaSave /> Cancelar
+                <MdOutlineCancel /> Cancelar
             </button>
             ):(
 
             <button type="button" className="btn btn-danger" onClick={handleDelete}>
-                <FaTrash /> Excluir Produto
+                <FaTrash /> Excluir
             </button>
             )}
         </div>

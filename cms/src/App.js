@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 import Layout from "./layouts/Layout";
 import AuthPage from "./pages/AuthPage";
 import CmsPage from "./pages/CmsPage";
@@ -9,8 +10,10 @@ import CatalogoPage from "./pages/produtos/CatalogoPage";
 import ProdutoPage from "./pages/ProdutoPage";
 import ClientePage from "./pages/ClientePage";
 import EquipePage from "./pages/EquipePage";
-import { AuthProvider } from "./context/AuthContext";
 import ProdutoDetailPage from "./pages/produtos/ProdutoDetailPage";
+import AcessosPage from "./pages/equipe/AcessosPage";
+import ColaboradorPage from "./pages/equipe/ColaboradorPage";
+
 const menuItemsCms = [
   { id: "", label: "Dashboard", icon: "home" },
   { id: "aparencia", label: "Aparência do Site", icon: "palette" },
@@ -30,6 +33,7 @@ const menuItemsClientes = [
 const menuItemsEquipe = [
   { id: "", label: "Dashboard", icon: "home" },
   { id: "acessos", label: "Acessos", icon: "acess"},
+  { id: "colaboradores", label: "Colaboradores", icon: "person"},
 ];
 
 
@@ -82,7 +86,8 @@ function App() {
               <Layout menuItens={menuItemsEquipe}>
                 <Routes>
                   <Route index element={<EquipePage />} />
-                  
+                  <Route path="acessos" element={<AcessosPage/>}/>
+                  <Route path="colaboradores" element={<ColaboradorPage/>}/>
                 </Routes>
               </Layout>
               } 

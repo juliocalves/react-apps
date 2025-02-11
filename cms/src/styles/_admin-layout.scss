@@ -8,37 +8,15 @@
   
       @media (max-width: 768px) { // Ajuste para telas menores
         flex-direction: column-reverse;
-        padding: 3rem 1rem; // Ajuste de padding para melhor espaçamento
-        min-height: 105vh;
+        padding: 3rem 1rem 5rem // Ajuste de padding para melhor espaçamento
       }
-  
-      .admin-sidebar {
-        background-color: var(--primary-color);
-        color: var(--light-color);
-        display: flex;
-        flex-direction: column;
-  
-        @media (max-width: 768px) {
-          width: 100%; // Sidebar ocupa toda a largura
-          height: auto;
-          flex-direction: row; // Deixa os itens em linha no mobile
-          justify-content: space-between;
-          padding: 1rem;
-        }
-  
-        h2 {
-          margin-bottom: 1rem;
-          padding: 0 1rem;
-          color: var(--light-color);
-        }
-      }
-  
       .admin-content {
         flex-grow: 1;
         padding: 1rem 2rem;
   
         @media (max-width: 768px) {
-          padding: 1rem; // Reduz o padding no mobile
+          padding: 1rem 0; // Reduz o padding no mobile
+          overflow: hidden;
         }
       }
     }

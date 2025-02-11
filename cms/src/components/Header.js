@@ -34,6 +34,26 @@ const Header = ({ user,theme, toggleTheme  }) => {
     return () => document.removeEventListener("click", handleClickOutside);
   }, [isNavOpen]);
 
+  useEffect(() => {
+    const handleClickLink = () => {
+      setIsNavOpen(false);
+      document.querySelector(".navbar-toggler").click(); // Fecha o menu no Bootstrap
+    };
+
+    const links = document.querySelectorAll(".header-link");
+    links.forEach((link) => link.addEventListener("click", handleClickLink));
+    // Seleciona os botões adicionais (ajuste os seletores conforme necessário)
+    const themeBtn = document.querySelector(".theme-toggle");
+    const alertBtn = document.querySelector(".alert-btn");
+
+    if (themeBtn) themeBtn.addEventListener("click", handleClickLink);
+    if (alertBtn) alertBtn.addEventListener("click", handleClickLink);
+    return () => {
+      links.forEach((link) => link.removeEventListener("click", handleClickLink));
+      if (themeBtn) themeBtn.removeEventListener("click", handleClickLink);
+    if (alertBtn) alertBtn.removeEventListener("click", handleClickLink);
+    };
+  }, []);
 
   return (
     <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark navbarcms">
@@ -54,25 +74,25 @@ const Header = ({ user,theme, toggleTheme  }) => {
         <div className="collapse navbar-collapse" id="navbarNav" style={isNavOpen ? { display: "flex" } : { display: "" }}>
           <ul className="navbar-nav me-auto">
             <li className="nav-item">
-              <Link to="/cms" className="nav-link">
+              <Link to="/cms" className="nav-link header-link">
               <SiCraftcms className="nav-icon me-2" />
                 CMS
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/produtos" className="nav-link">
-                <IoFastFoodSharp className="nav-icon me-2" />
+              <Link to="/produtos" className="nav-link header-link">
+                <IoFastFoodSharp className="nav-icon me-2"/>
                 PRODUTOS
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/clientes" className="nav-link">
+              <Link to="/clientes" className="nav-link header-link" >
               <BsFillPersonVcardFill className="nav-icon me-2" />
                 CLIENTES
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/equipe" className="nav-link">
+              <Link to="/equipe" className="nav-link header-link" >
                 <RiTeamFill className="nav-icon me-2" />
                 EQUIPE
               </Link>
@@ -86,7 +106,7 @@ const Header = ({ user,theme, toggleTheme  }) => {
               {theme === "light" ? "🌙" : "☀️"}
             </button>
             <button className="alert-btn" >
-            <FaBell className="alert-icon" />
+              <FaBell className="alert-icon" />
             </button>
             <button className="logout-btn" onClick={handleLogout}>
               <FaSignOutAlt className="logout-icon" />

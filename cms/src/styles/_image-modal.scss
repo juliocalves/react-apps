@@ -14,7 +14,7 @@
   .modal-content {
     background: var(--light-color);
     padding: 1rem;
-    border-radius: var(--border-radius);
+    border-radius: $border-radius;
     max-width: 80vh;
     max-height: 80%;
     overflow: auto;
@@ -24,7 +24,7 @@
   .modal-image {
     max-width: 100%;
     max-height: 80vh;
-    border-radius: var(--border-radius);
+    border-radius: $border-radius;
     width: 100% !important;
     height: fit-content !important;
   }
@@ -39,8 +39,8 @@
     color: var(--light-color);
     font-weight: bold;
     cursor: pointer;
-    border-radius: var(--border-radius);
-    transition: var(--transition-speed);
+    border-radius: $border-radius;
+    transition: $transition-speed;
   }
   
   .modal-close-btn:hover {

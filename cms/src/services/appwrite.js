@@ -1,5 +1,5 @@
 import { Client, Storage } from 'appwrite';
-
+import { v4 as uuidv4 } from 'uuid'; // Import the uuid library
 const REACT_APP_APP_WRITE_BUCKET_ID='679fc176000a3676b8a1'
 const REACT_APP_APP_WRITE_PROJECT_ID='679fc1150016dba6562b'
 const client = new Client()
@@ -12,7 +12,8 @@ export { storage };
 
 export const uploadImg = async (file) => {
   if (!file) return null;
-  const fileName = file.name.replace(/[^a-zA-Z0-9]/g, '_');
+  const uniqueId = uuidv4().substring(0, 12);
+  const fileName = uniqueId+ '_' + file.name.replace(/[^a-zA-Z0-9]/g, '_');
 
   try {
 

@@ -5,6 +5,9 @@ import ProdutoModal from "../../components/produtos/ProdutoModal";
 import { toast, ToastContainer } from "react-toastify";
 import { uploadImg, deleteFile } from "../../services/appwrite";
 import HeaderActions from "../../components/HeaderActions";
+import Table from "../../components/Table";
+
+
 const CatalogoPage = () => {
   const [produtos, setProdutos] = useState([]);
   const [modalAberto, setModalAberto] = useState(false);
@@ -12,7 +15,7 @@ const CatalogoPage = () => {
     nome: "",
     descricao: "",
     preco: 0,
-    imagens: [],// Utilizando um único campo para imagem de forma consistente
+    imagens: [],
   });
   const [isUploading, setIsUploading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -107,9 +110,7 @@ const CatalogoPage = () => {
     }
   };
 
-  /**
-   * handleSearchProd agora aceita tanto um objeto de evento quanto uma string.
-   */
+  
   const handleSearchProd = (search) => {
     let term = "";
     if (search && typeof search === "object" && search.target) {
@@ -130,23 +131,154 @@ const CatalogoPage = () => {
           produto.descricao.toLowerCase().includes(searchTerm)
       )
     : produtos;
-  // Função placeholder para futuros filtros
-  const handleFilter = () => {
-   
+  const [showFilter, setShowFilter] = useState(false);
+  const [filters, setFilters] = useState({  // Estado para armazenar os filtros
+    nome: "",
+    descricao: "",
+    precoMin: "",
+    precoMax: "",
+    // Adicione outros filtros aqui (categoria, marca, etc.)
+  });
+  
+  const handleFilterChange = (filterName, value) => {
+    setFilters({ ...filters, [filterName]: value });
   };
 
+  const onFilter = () => {
+    setShowFilter(!showFilter)
+  }
+
+  const handleApplyFilter = () => {
+    const filteredProdutos = produtos.filter((produto) => {
+      const nomeMatch = produto.nome.toLowerCase().includes(filters.nome.toLowerCase());
+      const descricaoMatch = produto.descricao.toLowerCase().includes(filters.descricao.toLowerCase());
+      const precoMatch = 
+        (filters.precoMin === "" || produto.preco >= parseFloat(filters.precoMin)) &&
+        (filters.precoMax === "" || produto.preco <= parseFloat(filters.precoMax));
+
+      return nomeMatch && descricaoMatch && precoMatch; // Todos os filtros devem corresponder
+    });
+    setProdutos(filteredProdutos)
+  }
+
+  const handleClearFilter = () => {
+    setFilters({
+      nome: "",
+      descricao: "",
+      precoMin: "",
+      precoMax: "",
+    })
+    const fetchProdutos = async () => {
+      const data = await getProdutos();
+      setProdutos(Array.isArray(data) ? data : []);
+    };
+    fetchProdutos();
+  }
+
+  const [isTableView, setIsTableView] = useState(
+    () => JSON.parse(localStorage.getItem("viewMode")) || false
+  );
+
+  // Função para alternar a exibição e salvar no localStorage
+  const handleChangeView = () => {
+    setIsTableView((prev) => {
+      const newValue = !prev;
+      localStorage.setItem("viewMode", JSON.stringify(newValue)); // Salva no localStorage
+      return newValue;
+    });
+  };
   return (
     <>
       <HeaderActions
         onNew={handleAbrirModal}
         onSearch={handleSearchProd}
-        onFilter={handleFilter}
+        onFilter={onFilter}
+        onChangeView={handleChangeView}
         showSearch={true}
         showFilter={true}
         showAdd={true}
+        showChangeView={true}
+        isTableView={isTableView}
       />
-      <div className="catalogo-container">
+      
+        {showFilter && (
+          <div className="filter-container card p-3 mb-3"> 
+            <div className="row"> 
+              <div className="col-md-3 mb-2"> 
+                <input
+                  type="text"
+                  className="form-control"  
+                  placeholder="Filtrar por nome"
+                  value={filters.nome}
+                  onChange={(e) => handleFilterChange("nome", e.target.value)}
+                />
+              </div>
+              <div className="col-md-3 mb-2">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Filtrar por descrição"
+                  value={filters.descricao}
+                  onChange={(e) => handleFilterChange("descricao", e.target.value)}
+                />
+              </div>
+              <div className="col-md-3 mb-2">
+                <input
+                  type="number"
+                  className="form-control"
+                  placeholder="Preço mínimo"
+                  value={filters.precoMin}
+                  onChange={(e) => handleFilterChange("precoMin", e.target.value)}
+                />
+              </div>
+              <div className="col-md-3 mb-2">
+                <input
+                  type="number"
+                  className="form-control"
+                  placeholder="Preço máximo"
+                  value={filters.precoMax}
+                  onChange={(e) => handleFilterChange("precoMax", e.target.value)}
+                />
+              </div>
+            </div> {/* End of row */}
+            <div className="d-flex justify-content-end"> {/* Align buttons to the right */}
+              <button className="btn btn-primary me-2" onClick={handleApplyFilter}> {/* Added Bootstrap button styles and margin */}
+                Aplicar Filtro
+              </button>
+              <button className="btn btn-secondary" onClick={handleClearFilter}> {/* Added Bootstrap button styles */}
+                Limpar Filtro
+              </button>
+            </div>
+          </div>
+        )}
         <ToastContainer />
+        {isTableView ? (
+         <Table 
+         tableHead={
+           <>
+             <th scope="col">Nome</th>
+             <th scope="col">Descrição</th>
+             <th scope="col">Preço</th>
+           </>
+         }
+         tableBody={
+           displayedProdutos.length > 0 ? (
+             displayedProdutos.map((produto) => (
+               <tr key={produto.id} onClick={() => handleProdutoClick(produto.id)}>
+                 <td>{produto.nome}</td>
+                 <td>{produto.descricao}</td>
+                 <td>R$ {produto.preco.toFixed(2)}</td>
+               </tr>
+             ))
+           ) : (
+             <tr>
+               <td colSpan="3" className="text-center">Nenhum produto encontrado.</td>
+             </tr>
+           )
+         }
+       />
+       
+      ) : (
         <div className="catalogo-grid">
           {displayedProdutos.length > 0 ? (
             displayedProdutos.map((produto) => (
@@ -177,6 +309,8 @@ const CatalogoPage = () => {
             <p>Nenhum produto encontrado.</p>
           )}
         </div>
+      )}
+
         <ProdutoModal
           isOpen={modalAberto}
           onClose={handleFecharModal}
@@ -188,7 +322,6 @@ const CatalogoPage = () => {
           handleImageUpload={handleImageUpload}
           handleDeleteImage={handleDeleteImage}
         />
-      </div>
     </>
   );
 };

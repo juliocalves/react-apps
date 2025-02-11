@@ -10,6 +10,7 @@
 @import 'image-modal';
 @import 'catalogo';
 @import 'product-detail';
+@import 'table';
 
 p, span, h1, h2, h3, h4, h5, h6 {
     color: var(--primary-color); /* Garantindo que todo texto seja claro */
@@ -17,3 +18,11 @@ p, span, h1, h2, h3, h4, h5, h6 {
 input{
   box-shadow: none !important;
 }
+
+.modal-content{
+  background-color: var(--secondary-color);
+  padding: 2rem;
+  border-radius:$border-radius;
+  box-shadow: $box-shadow;
+}
+

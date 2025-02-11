@@ -337,7 +337,7 @@ const AppearancePage = () => {
   ];
 
   return (
-    <div className="container mt-5">
+    <div className="">
       <ToastContainer />
       <div className="accordion-container">
         <Accordion items={accordionItems} id={"configuracoes"} />
