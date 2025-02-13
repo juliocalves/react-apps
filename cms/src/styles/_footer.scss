@@ -2,14 +2,16 @@
   @media (max-width: 768px) {
     display: none;
   }
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     text-align: center;
     padding: 1rem;
     bottom: 0;
     width: 100%;
-    font-size: 0.9rem;
-    height: 5rem;
+    height: 2.3rem;
     p{
+      font-size: 0.6rem;
       color: var(--light-color); // Cor do texto
     }
-   
   }

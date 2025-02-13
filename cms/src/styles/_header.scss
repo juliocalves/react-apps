@@ -28,6 +28,16 @@
         background: var(--primary-color);
         }
     }
+    .user-toglgle{
+      background: transparent;
+      border: none;
+      color: var(--light-color);
+      border-radius: $border-radius;
+      @include transition(background-color);
+      &:hover {
+        background: var(--primary-color);
+      }
+    }
 
     .user-info {
         display: flex;
@@ -40,8 +50,8 @@
         }
         
         .user-photo {
-            width: 40px;
-            height: 40px;
+            width: 2rem;
+            height: auto;
             border-radius: 50%;
             border: 2px solid var(--primary-color);
         }
@@ -50,8 +60,8 @@
 
 .header-actions {
   position: sticky;
-  top: var(--header-height, 4rem); 
-  background:var(--secondary-color);
+  top: var(--header-height, 4rem);
+  background: var(--secondary-color);
   z-index: 1000; // Garante que fique sobre outros elementos
   width: 100%;
   display: flex;
@@ -63,20 +73,23 @@
   border-radius: $border-radius;
   margin-bottom: 1rem;
   box-shadow: $box-shadow;
+  gap: 0.5rem;
   h2 {
     margin: 0;
     color: var(--text-dark-color);
-    font-size: 1.5rem;
-  }
-
-  .header-actions-buttons {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+    flex: 1; // Ocupa o espaço disponível
   }
 
   .search {
-    width: 40%;
+    flex: 2; // Ocupa mais espaço que o título
+    margin-left: 1rem; // Espaçamento entre o título e a busca
+  }
+ 
+  .header-actions-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-left: auto; // Empurra os botões para a direita
   }
 }
 
@@ -89,9 +102,14 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
-    font-size: 1.2rem;
+
+    h2 {
+      width: 100%; // Ocupa toda a largura
+    }
+
     .search {
-      width: 100%;
+      width: 100%; // Ocupa toda a largura
+      margin-left: 0; // Remove o espaçamento
     }
 
     .header-actions-buttons {
@@ -99,6 +117,7 @@
       align-items: center;
       width: 100%;
       justify-content: center;
+      margin-left: 0; // Remove o espaçamento
     }
   }
 }

@@ -1,4 +1,4 @@
-import { db } from "./firebase";
+import {auth, db,firebaseConfig} from "./firebase";
 import {  
   collection, 
   addDoc, 
@@ -12,6 +12,42 @@ import {
   getDoc, 
   setDoc
 } from "firebase/firestore";
+import { createUserWithEmailAndPassword ,getAuth,signOut} from "firebase/auth";
+
+import { initializeApp } from "firebase/app";
+
+// Crie uma instância secundária do Firebase App
+const secondaryApp = initializeApp(firebaseConfig, "Secondary");
+const secondaryAuth = getAuth(secondaryApp);
+/**
+ * Cria um colaborador vinculando a autenticação do Firebase e o Firestore.
+ *
+ * @param {Object} colaborador - Os dados do colaborador (ex: nome, email, cargo, etc.).
+ * @param {string} senhaPadrao - A senha padrão para o novo usuário.
+ * @returns {Promise<Object>} - Objeto contendo o status, mensagem e o uid do colaborador criado.
+ */
+export const createColaboradorWithAuth = async (colaborador, senhaPadrao) => {
+  try {
+    // Crie o usuário no Firebase Authentication usando a instância secundária
+    const { user } = await createUserWithEmailAndPassword(secondaryAuth, colaborador.email, senhaPadrao);
+
+    // Utilize o uid do usuário para criar o documento no Firestore
+    await setDoc(doc(db, "employes", user.uid), {
+      ...colaborador,
+      createdAt: new Date(),
+      ativo: colaborador.ativo !== undefined ? colaborador.ativo : true,
+      permissoes: Array.isArray(colaborador.permissoes) ? colaborador.permissoes : []
+    });
+
+    // Após criar o usuário, deslogue da instância secundária para não afetar a sessão principal
+    await signOut(secondaryAuth);
+
+    return { success: true, message: "Colaborador criado com sucesso!", id: user.uid };
+  } catch (error) {
+    return { success: false, message: `Erro ao criar colaborador: ${error.message}` };
+  }
+};
+
 
 const reservationsRef = collection(db, "reservations");
 
@@ -318,5 +354,81 @@ export const getProdutoById = async (id) => {
     return { id: docSnap.id, ...docSnap.data() };
   } else {
     return null;
+  }
+};
+
+
+const colaboradoresRef = collection(db, "employes");
+
+export const createColaborador = async (colaborador) => {
+  try {
+    const docRef = await addDoc(colaboradoresRef, colaborador);
+    return { success: true, message: "Colaborador criado com sucesso!", id: docRef.id };
+  }catch(error){
+    return { success: false, message: `Erro ao adicionar colaborador: ${error.message}` };
+  }
+};
+
+export const updateColaborador = async (colaboradorId, updatedColaborador) => {
+  try {
+    await updateDoc(doc(colaboradoresRef, colaboradorId), updatedColaborador);
+    return { success: true, message: "Colaborador atualizado com sucesso!" };
+  } catch (error) {
+    console.log(error)
+    return { success: false, message: `Erro ao atualizar colaborador: ${error.message}` };
+  }
+};
+
+export const getColaboradores = async () => {
+  try {
+    const querySnapshot = await getDocs(colaboradoresRef);
+    if (querySnapshot.empty) {
+      return []; 
+    }
+    return querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+  } catch (error) {
+    console.error("Erro ao buscar colaboradores:", error);
+    return []; 
+  }
+};
+
+///revisar para deixar oculto e criptografar dados sensíveis 
+export const deleteColaborador = async (colaboradorId) => {
+  try {
+    await deleteDoc(doc(db, "employes", colaboradorId));
+    return { success: true, message: "Colaborador excluído com sucesso!" };
+  } catch (error) {
+    return { success: false, message: `Erro ao excluir colaborador: ${error.message}` };
+  }
+};
+
+export const getColaboradorById = async (id) => {
+  const docRef = doc(db, "employes", id);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return { id: docSnap.id, ...docSnap.data() };
+  } else {
+    return null;
+  }
+};
+
+export const getAcessos = async () => {
+  try {
+    const querySnapshot = await getDocs(colaboradoresRef);
+    const acessosList = querySnapshot.docs
+      .map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }))
+      .filter((acesso) => Array.isArray(acesso.permissoes) && acesso.permissoes.length > 0);
+
+    return acessosList;
+  } catch (error) {
+    console.error("Erro ao buscar acessos:", error);
+    return [];
   }
 };

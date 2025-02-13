@@ -1,7 +1,20 @@
 import React from "react";
 import ImageWithModal from "../ImageModal";
 import { FaTrash } from "react-icons/fa";
-
+import MarkdownEditor from "../MarkdownEditor";
+/**
+ * AboutConfig component renders a configuration form for the "About" section.
+ *
+ * @param {Object} props - The component props.
+ * @param {Object} props.about - The about data object.
+ * @param {Function} props.handleChange - Function to handle changes in the input fields.
+ * @param {Function} props.handleImageUpload - Function to handle image uploads.
+ * @param {Function} props.handleDeleteImage - Function to handle image deletions.
+ * @param {boolean} props.isUploading - Flag indicating if an image is currently being uploaded.
+ * @param {boolean} props.isSaving - Flag indicating if the form is currently being saved.
+ *
+ * @returns {JSX.Element} The rendered AboutConfig component.
+ */
 const AboutConfig = ({ about, handleChange, handleImageUpload, handleDeleteImage, isUploading, isSaving }) => {
   const aboutItems = [
     {
@@ -15,34 +28,28 @@ const AboutConfig = ({ about, handleChange, handleImageUpload, handleDeleteImage
             value={about.title}
             onChange={(e) => handleChange("about", "title", e.target.value)}
           />
-          <textarea
-            className="form-control mb-3"
-            placeholder="Descrição"
-            value={about.description}
-            onChange={(e) => handleChange("about", "description", e.target.value)}
-          />
+          <MarkdownEditor
+          value={about.description}
+          onChange={(newText) => handleChange("about", "description", newText)}
+        />
         </>
       )
     },
     {
       title: "História",
       content: (
-        <textarea
-          className="form-control mb-3"
-          placeholder="História"
-          value={about.history}
-          onChange={(e) => handleChange("about", "history", e.target.value)}
+       <MarkdownEditor
+        value={about.mission}
+        onChange={(newText) => handleChange("about", "history", newText)}
         />
       )
     },
     {
       title: "Missão",
       content: (
-        <textarea
-          className="form-control mb-3"
-          placeholder="Missão"
+        <MarkdownEditor
           value={about.mission}
-          onChange={(e) => handleChange("about", "mission", e.target.value)}
+          onChange={(newText) => handleChange("about", "mission", newText)}
         />
       )
     },

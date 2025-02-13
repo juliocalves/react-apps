@@ -35,7 +35,7 @@
     right: 10px;
     padding: 0.5rem 1rem;
     border: none;
-    background: var(--danger-color);
+    background: var(--primary-color);
     color: var(--light-color);
     font-weight: bold;
     cursor: pointer;
@@ -44,5 +44,5 @@
   }
   
   .modal-close-btn:hover {
-    background: var(--dark-danger-color);
+    background: var(--accent-color);
   }

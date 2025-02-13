@@ -10,7 +10,7 @@ import AboutConfig from "../../components/cms/AboutConfig";
 import ContactConfig from "../../components/cms/ContactConfig";
 import ReservationsConfig from "../../components/cms/ReservationsConfig";
 import { uploadImg } from "../../services/appwrite";
-
+import HeaderActions from "../../components/HeaderActions";
 const AppearancePage = () => {
   const [pages, setPages] = useState({
     home: {
@@ -337,12 +337,17 @@ const AppearancePage = () => {
   ];
 
   return (
-    <div className="">
+    <>
+     <HeaderActions
+        showFilter={false}
+        showAdd={false}
+        showChangeView={false}
+      />
       <ToastContainer />
       <div className="accordion-container">
         <Accordion items={accordionItems} id={"configuracoes"} />
       </div>
-    </div>
+    </>
   );
 };
 

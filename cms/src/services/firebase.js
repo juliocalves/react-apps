@@ -33,4 +33,4 @@ setPersistence(auth, browserLocalPersistence)
   });
 
 // Exporte os módulos necessários
-export { auth, googleProvider, db };
+export { auth, googleProvider, db,firebaseConfig };

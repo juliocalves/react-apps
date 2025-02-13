@@ -7,6 +7,7 @@ import { SiCraftcms } from "react-icons/si";
 import { IoFastFoodSharp } from "react-icons/io5";
 import { BsFillPersonVcardFill } from "react-icons/bs";
 import { RiTeamFill } from "react-icons/ri";
+import UserCanvas from "./UserCanvas";
 const Header = ({ user,theme, toggleTheme  }) => {
   const { logout } = useAuth();
   const navigate = useNavigate();
@@ -54,6 +55,9 @@ const Header = ({ user,theme, toggleTheme  }) => {
     if (alertBtn) alertBtn.removeEventListener("click", handleClickLink);
     };
   }, []);
+  const toogleUserInf = () => {}
+
+  const toggleAlerts = () =>{}
 
   return (
     <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark navbarcms">
@@ -101,11 +105,14 @@ const Header = ({ user,theme, toggleTheme  }) => {
           </ul>
          
           <div className="d-flex user-info">
-            {user && <img src={user.photoURL} alt="User" className="user-photo" />}
+            <button className="user-toglgle" data-bs-toggle="offcanvas"
+                data-bs-target="#userCanvas" onClick={toogleUserInf}>
+              {user && <img src={user.photoURL} alt="User" className="user-photo" />}
+            </button>
             <button className="theme-toggle" onClick={toggleTheme}>
               {theme === "light" ? "🌙" : "☀️"}
             </button>
-            <button className="alert-btn" >
+            <button className="alert-btn" onClick={toggleAlerts} >
               <FaBell className="alert-icon" />
             </button>
             <button className="logout-btn" onClick={handleLogout}>
@@ -114,6 +121,7 @@ const Header = ({ user,theme, toggleTheme  }) => {
           </div>
         </div>
       </div>
+      <UserCanvas user={user || { displayName: "", email: "" }} onChangePassword={() => {}} onEditProfile={() => {}} onLogout={handleLogout} />
     </nav>
   );
 };

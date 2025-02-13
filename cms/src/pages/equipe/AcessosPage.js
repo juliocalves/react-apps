@@ -1,39 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {FaTrash } from "react-icons/fa";
 import AcessoModal from "../../components/equipe/AcessoModal";
 import { MdEdit } from "react-icons/md";
 import HeaderActions from "../../components/HeaderActions";
 import Table from "../../components/Table";
-
+import { getAcessos } from "../../services/firestore";
 
 const AcessosPage = () => {
-  const [acessos, setAcessos] = useState([
-    {
-      id: 1,
-      nome: "João Silva",
-      email: "joao@email.com",
-      data: "10/02/2025",
-      ativo: true,
-      permissoes: [
-        { pagina: "Dashboard", leitura: true, escrita: false, delete: false },
-        { pagina: "Configurações", leitura: true, escrita: true, delete: true },
-      ],
-    },
-    {
-      id: 2,
-      nome: "Maria Souza",
-      email: "maria@email.com",
-      data: "09/02/2025",
-      ativo: false,
-      permissoes: [
-        { pagina: "Configurações", leitura: true, escrita: true, delete: true },
-      ],
-    },
-  ]);
+  const [acessos, setAcessos] = useState([]);
 
   const [modalShow, setModalShow] = useState(false);
   const [editingAcesso, setEditingAcesso] = useState(null);
-
+  
   const handleSave = (acesso) => {
     // Garante que permissões seja sempre um array
     const novoAcesso = {
@@ -56,11 +34,39 @@ const AcessosPage = () => {
   const handleDelete = (id) => {
     setAcessos(acessos.filter((acesso) => acesso.id !== id));
   };
+  useEffect(() => {
+    const fetchAcessos = async () => {
+      const dados = await getAcessos();
+      setAcessos(dados);
+    };
+    fetchAcessos();
+  }, []);
 
+  const [searchTerm, setSearchTerm] = useState("");
+  const handleSearchAcesso = (search) => {
+    let term = "";
+    if (search && typeof search === "object" && search.target) {
+      term = search.target.value;
+    } else if (typeof search === "string") {
+      term = search;
+    }
+    setSearchTerm(term.toLowerCase());
+  };
+  const displayedAcessos = searchTerm
+    ? acessos.filter(
+        (acesso) =>
+          acesso.nome.toLowerCase().includes(searchTerm) ||
+          acesso.email.toLowerCase().includes(searchTerm) ||
+          acesso.permissoes.some((perm) =>
+            perm.pagina.toLowerCase().includes(searchTerm)
+          )
+      )
+    : acessos;
   return (
     <>
      <HeaderActions
         onNew={() => { setEditingAcesso(null); setModalShow(true); }}
+        onSearch={handleSearchAcesso}
         showSearch={true}
         showFilter={false}
         showAdd={true}
@@ -77,17 +83,17 @@ const AcessosPage = () => {
               <th scope="col">Permissões</th>
               <th scope="col">Ações</th>
             </>
-         }
+          }
          tableBody={
-          <>
-            {acessos.map((acesso, index) => (
+          displayedAcessos.length > 0 ? (
+            displayedAcessos.map((acesso, index) => (
               <tr key={acesso.id}>
                 <td>{index + 1}</td>
                 <td>{acesso.nome}</td>
                 <td>{acesso.email}</td>
                 <td>{acesso.data}</td>
                 <td>
-                  {acesso.permissoes.map((perm, idx) => (
+                  {(acesso.permissoes || []).map((perm, idx) => (
                     <div key={idx}>
                       <strong>{perm.pagina}:</strong>{" "}
                       {perm.leitura && "Leitura "} 
@@ -105,9 +111,12 @@ const AcessosPage = () => {
                   </button>
                 </td>
               </tr>
-            ))}
-          </>
-         }
+            ))
+          ) : (
+            <tr>
+                <td colSpan="7" className="text-center">Nenhum acesso adicionado.</td>
+            </tr>
+          )}
       />
 
       <AcessoModal show={modalShow} onClose={() => setModalShow(false)} onSave={handleSave} acesso={editingAcesso} />

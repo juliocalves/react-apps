@@ -2,8 +2,8 @@ import { useLocation } from "react-router-dom";
 import { FaPlus, FaFilter } from "react-icons/fa";
 import SearchBar from "../components/SearchBar";
 import { CiViewTimeline,CiViewTable  } from "react-icons/ci";
-const HeaderActions = ({ onNew, onFilter,onSearch,onChangeView, showSearch = true, 
-    showFilter = true, showAdd = true,showChangeView=true,isTableView }) => {
+const HeaderActions = ({ onNew, onFilter,onSearch,onChangeView, showSearch = false, 
+    showFilter = false, showAdd = false,showChangeView=false,isTableView }) => {
   const location = useLocation();
   const pageTitle = location.pathname.replace("/", "").toUpperCase();
   

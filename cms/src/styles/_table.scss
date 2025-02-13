@@ -2,28 +2,32 @@
     box-shadow: $box-shadow;
     transition: $transition-speed;
     border-radius: $border-radius;
-    min-height: 50vh;
+    height: 60vh; /* Definir uma altura para evitar cortes */
     background-color: var(--secondary-color);
-    padding: 1rem;
+    padding: 0 1rem 1rem 1rem;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: auto; 
 }
+
+
 
 .cms-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 1rem;
 }
 
 .cms-table thead {
+    position: sticky;
+    top: 0;
     background-color: var(--dark-color);
     color: var(--text-light-color);
+    z-index: 100; /* Eleva a prioridade do cabeçalho */
 }
+
 
 .cms-table th, 
 .cms-table td {
-    padding: 0.75rem;
     text-align: left;
     border-bottom: 1px solid var(--primary-color);
 }
@@ -41,14 +45,16 @@
     background-color: var(--light-background);
 }
 
+
+
 @media (max-width: 768px) {
     .cms-table-container {
         padding: 0.5rem;
+        height: 55vh;
     }
 
     .cms-table th, 
     .cms-table td {
         padding: 0.5rem;
-        font-size: 0.9rem;
     }
 }
