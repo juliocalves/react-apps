@@ -5,6 +5,52 @@ import HeaderActions from "../../components/HeaderActions";
 import Table from "../../components/Table";
 import { toast, ToastContainer } from "react-toastify";
 
+/**
+ * MessagePage component that displays a list of messages with options to confirm or delete them.
+ * It includes a search functionality to filter messages by name, email, or message content.
+ *
+ * @component
+ * @example
+ * return (
+ *   <MessagePage />
+ * )
+ *
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @function
+ * @name MessagePage
+ *
+ * @description
+ * This component fetches messages from an API on mount and allows users to confirm or delete messages.
+ * It also provides a search input to filter messages by name, email, or message content.
+ *
+ * @typedef {Object} Message
+ * @property {string} id - The unique identifier of the message.
+ * @property {string} name - The name of the client who sent the message.
+ * @property {string} email - The email of the client who sent the message.
+ * @property {string} message - The content of the message.
+ * @property {boolean} confirmed - The confirmation status of the message.
+ * @property {Date} createdAt - The date when the message was created.
+ *
+ * @typedef {Object} Event
+ * @property {Object} target - The target element of the event.
+ * @property {string} target.value - The value of the target element.
+ *
+ * @function
+ * @name handleConfirm
+ * @description Confirms a message by its ID.
+ * @param {string} id - The ID of the message to confirm.
+ *
+ * @function
+ * @name handleDelete
+ * @description Deletes a message by its ID.
+ * @param {string} id - The ID of the message to delete.
+ *
+ * @function
+ * @name handleSearchCliente
+ * @description Handles the search input to filter messages.
+ * @param {string|Event} search - The search term or event object containing the search term.
+ */
 const MessagePage = () => {
   const [messages, setMessages] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");

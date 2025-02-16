@@ -7,6 +7,16 @@ import { auth } from "../services/firebase";
 import SideBar from "../components/SideBar";
 import { getIdentity } from "../services/firestore";
 
+/**
+ * Layout component that provides the main structure for the application.
+ * It includes a sidebar, header, and footer, and manages theme and user authentication state.
+ *
+ * @param {Object} props - The component props.
+ * @param {React.ReactNode} props.children - The child components to be rendered within the layout.
+ * @param {Array} props.menuItens - The menu items to be displayed in the sidebar.
+ *
+ * @returns {JSX.Element} The rendered Layout component.
+ */
 const Layout = ({ children, menuItens }) => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();

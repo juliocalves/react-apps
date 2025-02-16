@@ -10,6 +10,56 @@ import { useNavigate } from "react-router-dom";
 import {createColaboradorWithAuth, getColaboradores, updateColaborador, deleteColaborador } from "../../services/firestore";
 import { toast,ToastContainer } from "react-toastify";
 
+/**
+ * ColaboradorPage component renders a page for managing collaborators.
+ * It includes functionalities to fetch, create, update, delete, and search collaborators.
+ * 
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ * 
+ * @example
+ * <ColaboradorPage />
+ * 
+ * @function
+ * @name ColaboradorPage
+ * 
+ * @description
+ * This component handles the following functionalities:
+ * - Fetching the list of collaborators from the server.
+ * - Creating a new collaborator with default authentication.
+ * - Updating an existing collaborator.
+ * - Deleting a collaborator.
+ * - Searching for collaborators by name, email, position, or function.
+ * - Displaying a modal for adding/editing a collaborator.
+ * - Displaying a modal for configuring access for a collaborator.
+ * 
+ * @property {Array} colaboradores - The list of collaborators.
+ * @property {Function} setColaboradores - Function to update the list of collaborators.
+ * @property {boolean} modalColaboradorAberto - State to control the visibility of the collaborator modal.
+ * @property {Function} setModalColaboradorAberto - Function to update the state of the collaborator modal.
+ * @property {boolean} modalAcessoAberto - State to control the visibility of the access modal.
+ * @property {Function} setModalAcessoAberto - Function to update the state of the access modal.
+ * @property {Object|null} colaboradorEditando - The collaborator being edited.
+ * @property {Function} setColaboradorEditando - Function to update the collaborator being edited.
+ * @property {string} searchTerm - The search term for filtering collaborators.
+ * @property {Function} setSearchTerm - Function to update the search term.
+ * 
+ * @function handleSalvarColaborador
+ * @description Handles saving a collaborator (create or update).
+ * @param {Object} colaborador - The collaborator object to be saved.
+ * 
+ * @function handleColaborador
+ * @description Navigates to the collaborator detail page.
+ * @param {string} colaboradorId - The ID of the collaborator.
+ * 
+ * @function handleExcluirColaborador
+ * @description Handles deleting a collaborator.
+ * @param {string} colaboradorId - The ID of the collaborator to be deleted.
+ * 
+ * @function handleSearchColaborador
+ * @description Handles searching for collaborators.
+ * @param {string|Object} search - The search term or event object containing the search term.
+ */
 const ColaboradorPage = () => {
   const [colaboradores, setColaboradores] = useState([]);
   const [modalColaboradorAberto, setModalColaboradorAberto] = useState(false);
