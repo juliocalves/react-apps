@@ -1,0 +1,137 @@
+.admin-header {
+   
+
+    h1 {
+      color: var(--primary-color);
+      margin-top: 0.3em;
+    }
+    
+    @media (max-width: 768px) {
+     
+        // .user-info{
+        // display: flex !important;
+        // flex-direction: column !important;
+        // }
+        .navbarNav{
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          margin-left: 0.5rem;
+          ul{
+            display: flex;
+            flex-direction: row !important;
+            gap:0.5rem;
+          }
+        }
+    }
+    .theme-toggle,
+    .logout-btn,
+    .alert-btn {
+    background: transparent;
+    color: var(--light-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: $border-radius;
+    @include transition(background-color);
+    
+    &:hover {
+        background: var(--primary-color);
+        }
+    }
+    .user-toglgle{
+      background: transparent;
+      border: none;
+      color: var(--light-color);
+      border-radius: $border-radius;
+      @include transition(background-color);
+      &:hover {
+        background: var(--primary-color);
+      }
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        
+        @media (max-width: 768px) {
+            flex-direction: row;
+            justify-content: center;
+        }
+        
+        .user-photo {
+            width: 2rem;
+            height: auto;
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+        }
+    }
+}
+
+.header-actions {
+  position: sticky;
+  top: var(--header-height, 4rem);
+  background: var(--secondary-color);
+  z-index: 1000; // Garante que fique sobre outros elementos
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+  flex-wrap: wrap;
+  border-radius: $border-radius;
+  margin-bottom: 1rem;
+  box-shadow: $box-shadow;
+  gap: 0.5rem;
+  h2 {
+    margin: 0;
+    color: var(--text-dark-color);
+    flex: 1; // Ocupa o espaço disponível
+  }
+
+  .search {
+    flex: 2; // Ocupa mais espaço que o título
+    margin-left: 1rem; // Espaçamento entre o título e a busca
+  }
+ 
+  .header-actions-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-left: auto; // Empurra os botões para a direita
+  }
+}
+
+// Responsividade
+@media (max-width: 768px) {
+  .header-actions {
+    top: 0.5rem;
+    padding: 0.5rem;
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+
+    h2 {
+      width: 100%; // Ocupa toda a largura
+    }
+
+    .search {
+      width: 100%; // Ocupa toda a largura
+      margin-left: 0; // Remove o espaçamento
+    }
+
+    .header-actions-buttons {
+      gap: 0.5rem;
+      align-items: center;
+      width: 100%;
+      justify-content: center;
+      margin-left: 0; // Remove o espaçamento
+    }
+  }
+}
+
+
+  

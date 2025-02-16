@@ -123,3 +123,15 @@ export const createContact = async (contactData) => {
     throw error; // Relançar erro para capturar na interface
   }
 };
+
+// Definimos uma referência fixa para o documento de identidade.
+const identityDocRef = doc(db, "identity", "config");
+export const getIdentity = async () => {
+  try {
+    const docSnap = await getDoc(identityDocRef);
+    return docSnap.exists() ? docSnap.data() : null;
+  } catch (error) {
+    console.error("Erro ao buscar identidade:", error);
+    return null;
+  }
+};

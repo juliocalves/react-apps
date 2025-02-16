@@ -1,0 +1,125 @@
+
+
+  .botao-adicionar {
+    background-color: var(--primary-color);
+    color: var(--text-light-color);
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: $transition-speed;
+
+    &:hover {
+      background-color: var(--accent-color);
+    }
+  }
+  @media (max-width: 768px) {
+    .catalogo-grid{
+      justify-content: center;
+    }
+  }
+  .catalogo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 2rem;
+   
+    .produto-card {
+      background-color: var(--light-color);
+      border-radius: $border-radius;
+      box-shadow: $box-shadow;
+      padding: 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: $transition-speed;
+      width: 12rem;
+      &:hover {
+        transform: scale(1.03);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .card-img-top {
+        overflow: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary-color) transparent;
+      }
+      @media (max-width: 768px) {
+      
+        .card-img-top {
+          /* Para Firefox */
+          scrollbar-width: none;
+          /* Para Internet Explorer 10+ */
+          -ms-overflow-style: none;
+        }
+        
+        /* Para Chrome, Safari e Opera */
+        .card-img-top::-webkit-scrollbar {
+          display: none;
+        }
+      }
+      
+      .produto-imagem {
+        width: 100%;
+        height: auto;
+        border-radius:$border-radius;
+        margin-bottom: 0.5rem;
+      }
+
+      
+
+      .produto-preco {
+        font-weight: bold;
+        color: var(--accent-color);
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .catalogo-grid{
+
+      .produto-card{
+        width: 20rem;
+      }
+    }
+  }
+
+
+.produto-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.produto-modal {
+  background-color: var(--secondary-color);
+  padding: 2rem;
+  border-radius:$border-radius;
+  box-shadow: $box-shadow;
+  width: 90%;
+  max-width: 500px;
+}
+
+.produto-modal label {
+  color: var(--primary-color);
+}
+
+.produto-modal .form-group {
+  margin-bottom: 1rem;
+}
+
+.produto-modal .modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}

@@ -1,41 +1,10 @@
-var(--primary-color): #333;
-var(--secondary-color): #f4f4f4;
-$hover-color: #ff9800;
-var(--accent-color): #ff9800;
-$footer-bg: #222;
-$footer-text: #ddd;
-$layout-bg: #fff;
-$mobile-breakpoint: 768px;
-
-// Base Styles - Typography and layout
-
-body {
-    margin: 0;
-    font-family: sans-serif; // Define a default font-family
-    color: var(--primary-color); // Default text color
-    line-height: 1.6; // Improved readability
-}
-
-h1, h2, h3 { // Style all heading levels
-    color: var(--primary-color);
-    font-weight: bold;
-    margin-bottom: 1rem; // Consistent margin for headings
-}
-
-h1 {
-    font-size: 2.5rem; // Default h1 size
-}
-
-p {
-  margin-bottom: 1rem; // Consistent margin for paragraphs
-}
 
 
 .public-layout {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: $layout-bg;
+    background: var(--primary-color);
 
     .main-content {
         flex-grow: 1;
@@ -43,37 +12,7 @@ p {
     }
 }
 
-// // Navbar
-// .navbar {
-//     background: var(--primary-color);
-//     padding: 1rem 2rem;
-//     .nav-links {
-//         list-style: none;
-//         display: flex;
-//         justify-content: center;
-//         gap: 1.5rem;
 
-//         li {
-//             a {
-//                 text-decoration: none;
-//                 color: var(--secondary-color);
-//                 font-size: 1.2rem;
-//                 font-weight: bold;
-//                 transition: color 0.3s ease;
-
-//                 &:hover {
-//                     color: $hover-color;
-//                 }
-//             }
-//         }
-
-//         @media (max-width: $mobile-breakpoint) {
-//             flex-direction: column;
-//             align-items: center;
-//             gap: 1rem;
-//         }
-//     }
-// }
 
 
 // Home Page
@@ -96,7 +35,7 @@ p {
         }
 
         p {
-            color: darken(var(--primary-color), 20%);
+            color: var(--primary-color);
         }
 
         .banner-image {
@@ -120,22 +59,12 @@ p {
             transition: background 0.3s ease;
 
             &:hover {
-                background: darken(var(--accent-color), 10%);
+                background:var(--accent-color), 10%;
             }
         }
     }
 
-    @media (max-width: $mobile-breakpoint) {
-        .main-section {
-            padding: 1rem;
-        }
-        .banner-section h1 {
-            font-size: 2rem;
-        }
-        .cta-button {
-            font-size: 1rem;
-        }
-    }
+   
 }
 
 // Client Page
@@ -181,7 +110,7 @@ p {
       transition: background 0.3s;
   
       &:hover {
-        background: darken(var(--accent-color), 10%);
+        background: var(--accent-color);
       }
   
       &:disabled {
@@ -216,12 +145,6 @@ p {
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
   
-    @media (max-width: $mobile-breakpoint) {
-      form {
-        width: 90%;
-        padding: 1rem;
-      }
-    }
 }
 
 // Contact Page
@@ -233,7 +156,7 @@ p {
     background: var(--secondary-color);
    
     p {
-        color: darken(var(--primary-color), 20%);
+        color: var(--primary-color);
         margin-bottom: 2rem;
         text-align: center;
     }
@@ -286,50 +209,15 @@ p {
         transition: background 0.3s ease;
   
         &:hover {
-          background: darken(var(--accent-color), 10%);
+          background: var(--accent-color);
         }
       }
     }
   
-    @media (max-width: $mobile-breakpoint) {
-      padding: 1rem;
-  
-      h1 {
-        font-size: 2rem;
-      }
-  
-      p {
-        font-size: 1rem;
-      }
-  
-      .contact-form {
-        padding: 1rem;
-  
-        .form-group {
-          label {
-            font-size: 1rem;
-          }
-  
-          input,
-          textarea {
-            font-size: 0.9rem;
-          }
-        }
-  
-        .submit-button {
-          font-size: 1rem;
-        }
-      }
-    }
+    
 }
 
-.footer {
-    background: $footer-bg;
-    color: $footer-text;
-    text-align: center;
-    padding: 1rem 0;
-    font-size: 0.9rem;
-}
+
 
 /* AboutPage.css */
 .sobre-page {

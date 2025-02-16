@@ -26,10 +26,10 @@ const googleProvider = new GoogleAuthProvider();
 // Configura a persistência de autenticação
 setPersistence(auth, browserLocalPersistence)
   .then(() => {
-    console.log("Persistência de autenticação configurada com sucesso.");
+    // console.log("Persistência de autenticação configurada com sucesso.");
   })
   .catch((error) => {
-    console.error("Erro ao configurar persistência de autenticação:", error);
+    // console.error("Erro ao configurar persistência de autenticação:", error);
   });
 
 // Exporte os módulos necessários
