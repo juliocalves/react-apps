@@ -13,6 +13,18 @@ import {
 const reservationsRef = collection(db, "reservations");
 
 // 📌 Criar uma nova reserva garantindo que todos os campos obrigatórios estão preenchidos
+/**
+ * Creates a new reservation in the Firestore database.
+ *
+ * @param {Object} reservationData - The data for the reservation.
+ * @param {string} reservationData.name - The name of the person making the reservation.
+ * @param {string} reservationData.email - The email of the person making the reservation.
+ * @param {string} reservationData.phone - The phone number of the person making the reservation.
+ * @param {Date} reservationData.startDate - The start date of the reservation.
+ * @param {Date} reservationData.endDate - The end date of the reservation.
+ * @returns {Promise<string>} The ID of the created reservation document.
+ * @throws Will throw an error if required fields are missing or if there is an error adding the reservation.
+ */
 export const createReservation = async (reservationData) => {
   try {
     // 📌 Validação dos campos obrigatórios
@@ -43,6 +55,13 @@ export const createReservation = async (reservationData) => {
 };
 
 // 📌 Listar todas as reservas
+/**
+ * Fetches all reservations from the Firestore database.
+ *
+ * @returns {Promise<Array<Object>>} A promise that resolves to an array of reservation objects.
+ * Each reservation object contains an `id` property and other reservation details.
+ * If an error occurs, an empty array is returned.
+ */
 export const getAllReservations = async () => {
   try {
     const querySnapshot = await getDocs(query(reservationsRef));
@@ -57,6 +76,14 @@ export const getAllReservations = async () => {
 };
 
 // 📌 Buscar todas as reservas confirmadas e gerar lista de datas bloqueadas
+/**
+ * Fetches confirmed reservations from Firestore and generates a list of blocked dates.
+ *
+ * @async
+ * @function getConfirmedReservations
+ * @returns {Promise<Date[]>} A promise that resolves to an array of blocked dates.
+ * @throws Will log an error message to the console if the fetch operation fails.
+ */
 export const getConfirmedReservations = async () => {
   try {
     const q = query(reservationsRef, where("confirmed", "==", true));
@@ -86,6 +113,13 @@ export const getConfirmedReservations = async () => {
   }
 };
 // Buscar conteúdo de uma página
+/**
+ * Fetches the content of a specified page from Firestore.
+ *
+ * @param {string} page - The identifier of the page to fetch.
+ * @returns {Promise<Object|null>} A promise that resolves to the page content if it exists, or null if it does not.
+ * @throws {Error} If there is an error while fetching the page content.
+ */
 export const getPageContent = async (page) => {
   try {
     const docRef = doc(db, "pages", page); // Referência ao documento

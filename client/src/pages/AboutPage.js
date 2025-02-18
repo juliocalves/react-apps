@@ -3,6 +3,22 @@ import PublicLayout from "../layouts/PublicLayout";
 import { getPageContent } from "../services/firestore";
 import { Carousel } from "react-bootstrap";
 import ReactMarkdown from 'react-markdown';
+/**
+ * AboutPage component fetches and displays content about the company.
+ * 
+ * This component uses the `useState` hook to manage the content state, which includes
+ * title, description, history, mission, and images. It also uses the `useEffect` hook
+ * to fetch the content from an API when the component mounts.
+ * 
+ * The component renders a layout with a title, a carousel of images if available, and
+ * a markdown description. If images are not available, it shows a loading message.
+ * 
+ * @component
+ * @example
+ * return (
+ *   <AboutPage />
+ * )
+ */
 const AboutPage = () => {
   const [content, setContent] = useState({
     title: "",

@@ -3,6 +3,41 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { createReservation, getConfirmedReservations } from '../services/firestore';
 import PublicLayout from '../layouts/PublicLayout';
+import ptBR from "date-fns/locale/pt-BR";
+import { getPageContent } from "../services/firestore";
+import { registerLocale } from "react-datepicker";
+/**
+ * ClientPage component allows users to make a reservation by filling out a form.
+ * It handles form submission, validation, and displays a success modal upon successful reservation.
+ *
+ * @component
+ * @example
+ * return (
+ *   <ClientPage />
+ * )
+ *
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @function
+ * @name ClientPage
+ *
+ * @description
+ * - Fetches and displays content for the reservation page.
+ * - Fetches blocked dates to prevent users from selecting unavailable dates.
+ * - Handles form submission and validation.
+ * - Displays a success modal upon successful reservation.
+ *
+ * @typedef {Object} Reservation
+ * @property {string} name - The name of the person making the reservation.
+ * @property {string} email - The email of the person making the reservation.
+ * @property {string} phone - The phone number of the person making the reservation.
+ * @property {Date|null} startDate - The start date of the reservation.
+ * @property {Date|null} endDate - The end date of the reservation.
+ *
+ * @typedef {Object} Content
+ * @property {string} title - The title of the reservation page.
+ * @property {string} description - The description of the reservation page.
+ */
 const ClientPage = () => {
   const [reservation, setReservation] = useState({
     name: '',
@@ -11,12 +46,26 @@ const ClientPage = () => {
     startDate: null,
     endDate: null,
   });
-
+  registerLocale("pt-BR", ptBR);
   const [blockedDates, setBlockedDates] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false); // 📌 Controle de envio
   const [showModal, setShowModal] = useState(false); // 📌 Controle do modal
+ const [content, setContent] = useState({
+    title: "",
+    description: "",
+  });
 
+  ///para usar mardkdown
+  //const description = content.description;
+  useEffect(() => {
+    const fetchContent = async () => {
+      const aboutContent = await getPageContent("reservation");
+      if (aboutContent) setContent(aboutContent);
+    };
+
+    fetchContent();
+  }, []);
   // 📌 Buscar datas bloqueadas ao carregar a página
   useEffect(() => {
     const fetchBlockedDates = async () => {
@@ -67,7 +116,8 @@ const ClientPage = () => {
   return (
     <PublicLayout>
       <div className='client-page'>
-        <h1 className='client-title'>Página do Cliente</h1>
+        <h1 className='client-title'>{content.title || "Faça uma reserva"}</h1>
+        <p className='client-title'>{content.description || "Faça uma reserva"}</p>
         <form className='form-reservation' onSubmit={handleSubmit}>
           <input
             className='input-field'
@@ -96,6 +146,7 @@ const ClientPage = () => {
 
           {/* 📌 DatePicker para selecionar um período */}
           <DatePicker
+            locale="pt-BR"
             className='date-picker'
             selectsRange
             startDate={reservation.startDate}

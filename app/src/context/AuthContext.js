@@ -10,16 +10,17 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  // Configura a persistência de autenticação
   useEffect(() => {
+    console.log("auth:", auth);
     setPersistence(auth, browserLocalPersistence)
       .then(() => {
-        // console.log("Persistência de autenticação configurada com sucesso.");
+        // Persistência configurada com sucesso.
       })
       .catch((error) => {
-        // console.error("Erro ao configurar persistência de autenticação:", error);
+        console.error("Erro ao configurar persistência de autenticação:", error);
       });
   }, []);
+  
 
   useEffect(() => {
     // Verifica o estado de autenticação do usuário

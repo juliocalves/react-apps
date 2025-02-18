@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-
+import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -9,6 +9,7 @@ const firebaseConfig = {
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 // Inicialize o Firebase
@@ -23,6 +24,9 @@ const db = getFirestore(app);
 // Configura o provedor de autenticação do Google
 const googleProvider = new GoogleAuthProvider();
 
+// Configura analytics
+const analytics = getAnalytics(app);
+
 // Configura a persistência de autenticação
 setPersistence(auth, browserLocalPersistence)
   .then(() => {
@@ -33,4 +37,4 @@ setPersistence(auth, browserLocalPersistence)
   });
 
 // Exporte os módulos necessários
-export { auth, googleProvider, db,firebaseConfig };
+export { auth, googleProvider, db,firebaseConfig,analytics };

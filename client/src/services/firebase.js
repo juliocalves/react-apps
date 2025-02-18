@@ -2,6 +2,18 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
+/**
+ * Firebase configuration object containing keys and identifiers for the app.
+ * The values are sourced from environment variables.
+ * 
+ * @type {Object}
+ * @property {string} apiKey - The API key for Firebase.
+ * @property {string} authDomain - The authentication domain for Firebase.
+ * @property {string} projectId - The project ID for Firebase.
+ * @property {string} storageBucket - The storage bucket for Firebase.
+ * @property {string} messagingSenderId - The messaging sender ID for Firebase.
+ * @property {string} appId - The app ID for Firebase.
+ */
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
