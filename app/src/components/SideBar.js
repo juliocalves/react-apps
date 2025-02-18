@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FaHome, FaCalendarAlt, FaPalette } from 'react-icons/fa';
-import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight, MdMenuBook } from 'react-icons/md';
+import { FaHome, FaCalendarAlt, FaPalette,FaMoneyBillWave } from 'react-icons/fa';
+import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight, MdMenuBook,MdTableRestaurant } from 'react-icons/md';
 import { BsFileEarmarkPersonFill } from "react-icons/bs";
 import { FaMessage } from "react-icons/fa6";
 import { GrDocumentConfig } from "react-icons/gr";
@@ -12,9 +12,26 @@ const iconMap = {
   messages: FaMessage,
   book: MdMenuBook,
   acess: GrDocumentConfig,
-  person: BsFileEarmarkPersonFill
+  person: BsFileEarmarkPersonFill,
+  table: MdTableRestaurant,
+  money: FaMoneyBillWave
 };
 
+/**
+ * Sidebar component that renders a collapsible sidebar with navigation items.
+ *
+ * @param {Object} props - The component props.
+ * @param {Function} props.onTabChange - Callback function to handle tab change.
+ * @param {string} props.activeTab - The currently active tab identifier.
+ * @param {string} props.logoUrl - URL of the logo image.
+ * @param {string} props.brandName - Name of the brand to display.
+ * @param {Array} props.menuItems - Array of menu items to display in the sidebar.
+ * @param {string} props.menuItems[].id - Unique identifier for the menu item.
+ * @param {string} props.menuItems[].label - Label for the menu item.
+ * @param {string} props.menuItems[].icon - Icon name for the menu item.
+ *
+ * @returns {JSX.Element} The rendered Sidebar component.
+ */
 const Sidebar = ({ onTabChange, activeTab, logoUrl, brandName, menuItems }) => {
   // ⚡ Estado inicial corretamente convertido em booleano
   const [isMinimized, setIsMinimized] = useState(() => {

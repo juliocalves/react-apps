@@ -7,7 +7,18 @@ import { SiCraftcms } from "react-icons/si";
 import { IoFastFoodSharp } from "react-icons/io5";
 import { BsFillPersonVcardFill } from "react-icons/bs";
 import { RiTeamFill } from "react-icons/ri";
+import {MdTableRestaurant } from 'react-icons/md';
 import UserCanvas from "./UserCanvas";
+/**
+ * Header component that displays the navigation bar with links and user information.
+ *
+ * @param {Object} props - The component props.
+ * @param {Object} props.user - The user object containing user information.
+ * @param {string} props.theme - The current theme, either "light" or "dark".
+ * @param {Function} props.toggleTheme - Function to toggle the theme between light and dark.
+ *
+ * @returns {JSX.Element} The rendered Header component.
+ */
 const Header = ({ user,theme, toggleTheme  }) => {
   const { logout } = useAuth();
   const navigate = useNavigate();
@@ -110,7 +121,14 @@ const Header = ({ user,theme, toggleTheme  }) => {
                 </span>
               </Link>
             </li>
-           
+            <li className="nav-item">
+              <Link to="/comandas" className="nav-link header-link" >
+                <MdTableRestaurant className="nav-icon me-2" />
+                <span>
+                  COMANDAS
+                </span>
+              </Link>
+            </li>
           </ul>
          
           <div className="d-flex user-info">

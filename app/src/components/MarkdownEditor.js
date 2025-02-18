@@ -1,6 +1,19 @@
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 
+/**
+ * MarkdownEditor component allows users to edit and preview Markdown text.
+ *
+ * @component
+ * @param {Object} props - Component properties.
+ * @param {string} props.value - The current value of the Markdown text.
+ * @param {function} props.onChange - Callback function to handle changes in the Markdown text.
+ *
+ * @example
+ * <MarkdownEditor value={markdownText} onChange={handleMarkdownChange} />
+ *
+ * @returns {JSX.Element} The rendered MarkdownEditor component.
+ */
 const MarkdownEditor = ({ value, onChange }) => {
   const [showPreview, setShowPreview] = useState(false);
   const [showModal, setShowModal] = useState(false);

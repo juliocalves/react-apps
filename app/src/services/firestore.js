@@ -10,7 +10,8 @@ import {
   query, 
   where,
   getDoc, 
-  setDoc
+  setDoc,
+  increment 
 } from "firebase/firestore";
 import { createUserWithEmailAndPassword ,getAuth,signOut} from "firebase/auth";
 
@@ -52,6 +53,18 @@ export const createColaboradorWithAuth = async (colaborador, senhaPadrao) => {
 const reservationsRef = collection(db, "reservations");
 
 // 📌 Criar uma nova reserva garantindo que todos os campos obrigatórios estão preenchidos
+/**
+ * Creates a new reservation in the Firestore database.
+ *
+ * @param {Object} reservationData - The data for the reservation.
+ * @param {string} reservationData.name - The name of the person making the reservation.
+ * @param {string} reservationData.email - The email of the person making the reservation.
+ * @param {string} reservationData.phone - The phone number of the person making the reservation.
+ * @param {Date} reservationData.startDate - The start date of the reservation.
+ * @param {Date} reservationData.endDate - The end date of the reservation.
+ * @throws {Error} Throws an error if required fields are missing or if there is an issue adding the reservation.
+ * @returns {Promise<string>} The ID of the created reservation document.
+ */
 export const createReservation = async (reservationData) => {
   try {
     // 📌 Validação dos campos obrigatórios
@@ -430,5 +443,201 @@ export const getAcessos = async () => {
   } catch (error) {
     console.error("Erro ao buscar acessos:", error);
     return [];
+  }
+};
+/**
+ * Salva um pedido no Firestore.
+ * @param {Object} pedido - Objeto contendo os dados do pedido.
+ *   Exemplo de pedido:
+ *   {
+ *     mesa: 1,
+ *     products: [
+ *       { id: "abc123", nome: "Produto 1", preco: 34.5, quantidade: 2 },
+ *       { id: "def456", nome: "Produto 2", preco: 20.0, quantidade: 1 }
+ *     ],
+ *     total: 89.0,
+ *     orderOpen: true
+ *   }
+ * @returns {Promise<string>} - ID do documento criado.
+ */
+export const savePedido = async (pedido) => {
+  try {
+    // Adiciona um timestamp do servidor para a criação do pedido
+    const pedidoData = {
+      ...pedido,
+      createdAt: serverTimestamp(),
+    };
+
+    // Adiciona o pedido na coleção "pedidos"
+    const docRef = await addDoc(collection(db, "pedidos"), pedidoData);
+
+    console.log("Pedido salvo com sucesso. ID:", docRef.id);
+    return docRef.id;
+  } catch (error) {
+    console.error("Erro ao salvar pedido:", error);
+    throw error;
+  }
+};
+export const updatePedido = async (pedido) => {
+  try {
+    console.log(pedido)
+    const pedidoRef = doc(db, "pedidos", pedido.id);
+
+    // Remove campos com valor undefined
+    const sanitizedPedido = Object.keys(pedido).reduce((acc, key) => {
+      if (pedido[key] !== undefined) {
+        acc[key] = pedido[key];
+      }
+      return acc;
+    }, {});
+
+    await updateDoc(pedidoRef, sanitizedPedido);
+    console.log("Pedido atualizado com sucesso!");
+  } catch (error) {
+    console.error("Erro ao atualizar pedido:", error);
+    throw error;
+  }
+};
+
+
+
+/**
+ * Recupera o pedido ativo para uma mesa específica.
+ * @param {number|string} mesa - O número ou identificador da mesa.
+ * @returns {Promise<Object|null>} - Retorna o pedido encontrado ou null, se não houver.
+ */
+export const getPedidoByMesa = async (mesa) => {
+  try {
+    // Referência para a coleção "pedidos"
+    const pedidosRef = collection(db, "pedidos");
+    // Consulta para filtrar por mesa e apenas pedidos abertos (orderOpen === true)
+    const q = query(pedidosRef, where("mesa", "==", mesa), where("orderOpen", "==", true));
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+      return null;
+    }
+    // Assume que há apenas um pedido ativo por mesa; retorna o primeiro encontrado
+    const pedidoDoc = querySnapshot.docs[0];
+    return { id: pedidoDoc.id, ...pedidoDoc.data() };
+  } catch (error) {
+    console.error("Erro ao buscar pedido para a mesa", mesa, error);
+    throw error;
+  }
+};
+
+export const getPedidoPagarByMesa = async (mesa) => {
+  try {
+    // Referência para a coleção "pedidos"
+    const pedidosRef = collection(db, "pedidos");
+    // Consulta para filtrar por mesa e apenas pedidos abertos (orderOpen === true)
+    const q = query(pedidosRef,  where("mesa", "==", mesa), where("paymentStatus", "==", "Aguardando pagamento"));
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+      return null;
+    }
+    // Assume que há apenas um pedido ativo por mesa; retorna o primeiro encontrado
+    const pedidoDoc = querySnapshot.docs[0];
+    return { id: pedidoDoc.id, ...pedidoDoc.data() };
+  } catch (error) {
+    console.error("Erro ao buscar pedido para a mesa", mesa, error);
+    throw error;
+  }
+};
+
+export const getPedidoByMesaPagamento = async () => {
+  try {
+    // Referência para a coleção "pedidos"
+    const pedidosRef = collection(db, "pedidos");
+    // Consulta para filtrar pedidos cujo paymentStatus seja "Aguardando pagamento"
+    const q = query(pedidosRef, where("paymentStatus", "==", "Aguardando pagamento"));
+    const querySnapshot = await getDocs(q);
+    
+    if (querySnapshot.empty) {
+      return [];
+    }
+    
+    // Mapeia os pedidos para obter os números das mesas com status "Aguardando pagamento"
+    const mesasAguardandoPagamento = querySnapshot.docs.map(doc => doc.data().mesa);
+    return mesasAguardandoPagamento;
+  } catch (error) {
+    console.error("Erro ao buscar mesas com pedidos aguardando pagamento", error);
+    throw error;
+  }
+};
+/**
+ * Recupera todas as mesas que possuem comandas abertas.
+ * @returns {Promise<Array>} - Retorna uma lista de mesas com comandas abertas.
+ */
+export const getMesasComComandasAbertas = async () => {
+  try {
+    // Referência para a coleção "pedidos"
+    const pedidosRef = collection(db, "pedidos");
+    // Consulta para filtrar apenas pedidos abertos (orderOpen === true)
+    const q = query(pedidosRef, where("orderOpen", "==", true));
+    const querySnapshot = await getDocs(q);
+    
+    if (querySnapshot.empty) {
+      return [];
+    }
+    
+    // Mapeia os pedidos para obter os números das mesas com comandas abertas
+    const mesasAbertas = querySnapshot.docs.map(doc => doc.data().mesa);
+    return mesasAbertas;
+  } catch (error) {
+    console.error("Erro ao buscar mesas com comandas abertas", error);
+    throw error;
+  }
+};
+
+
+/**
+ * Decrementa o estoque de um produto no Firestore.
+ * @param {string} productId - O ID do produto.
+ * @param {number} amount - Quantidade a ser decrementada (padrão: 1).
+ * @returns {Promise<void>}
+ */
+export const decrementProductStock = async (productId, amount = 1) => {
+  try {
+    const productRef = doc(db, "products", productId);
+    await updateDoc(productRef, {
+      quantidadeEstoque: increment(-amount)
+    });
+  } catch (error) {
+    console.error("Erro ao decrementar estoque do produto:", error);
+    throw error;
+  }
+};
+
+/**
+ * Incrementa o estoque de um produto no Firestore.
+ * @param {string} productId - O ID do produto.
+ * @param {number} amount - Quantidade a ser incrementada (padrão: 1).
+ * @returns {Promise<void>}
+ */
+export const incrementProductStock = async (productId, amount = 1) => {
+  try {
+    const productRef = doc(db, "products", productId);
+    await updateDoc(productRef, {
+      quantidadeEstoque: increment(amount)
+    });
+  } catch (error) {
+    console.error("Erro ao incrementar estoque do produto:", error);
+    throw error;
+  }
+};
+
+export const getPedidos = async () => {
+  try {
+    const querySnapshot = await getDocs(collection(db, "pedidos"));
+    if (querySnapshot.empty) {
+      return []; // Retorna um array vazio se não houver produtos
+    }
+    return querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+  } catch (error) {
+    console.error("Erro ao buscar produtos:", error);
+    return []; // Retorna um array vazio em caso de erro
   }
 };

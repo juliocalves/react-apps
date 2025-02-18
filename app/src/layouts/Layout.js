@@ -17,7 +17,7 @@ import { getIdentity } from "../services/firestore";
  *
  * @returns {JSX.Element} The rendered Layout component.
  */
-const Layout = ({ children, menuItens }) => {
+const Layout = ({ children, menuItens, hideSideMenu=false }) => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -91,13 +91,15 @@ const Layout = ({ children, menuItens }) => {
   return (
     <div className="admin-main">
       <div className="admin-container">
-        <SideBar
-          onTabChange={handleTabChange}
-          activeTab={handleActiveTab}
-          logoUrl={identityConfig?.logoUrl}
-          brandName={identityConfig?.brandName.toUpperCase()}
-          menuItems={menuItens}
-        />
+        {!hideSideMenu && (
+          <SideBar
+            onTabChange={handleTabChange}
+            activeTab={handleActiveTab}
+            logoUrl={identityConfig?.logoUrl}
+            brandName={identityConfig?.brandName.toUpperCase()}
+            menuItems={menuItens}
+          />)
+        }
         <main className="admin-content">
           <header className="admin-header">
             <Header user={user} theme={theme} toggleTheme={toggleTheme} />

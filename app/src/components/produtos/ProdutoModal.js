@@ -83,6 +83,48 @@ const ProdutoModal = ({
                 onChange={(e) => handleChange("precoPromocional", parseFloat(e.target.value))}
               />
             </div>
+          <div className="form-group">
+              <div className="input-group mb-3">
+                <div className="input-group-text">
+                  <input
+                    className="form-check-input mt-0"
+                    type="checkbox"
+                    aria-label="Checkbox for following text input"
+                    checked={produto.usaEstoque}
+                    onChange={(e) => handleChange("usaEstoque", e.target.checked)}
+                  />
+                </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  readOnly
+                  aria-label="Text input with checkbox"
+                  placeholder="Aplica estoque"
+                />
+              </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="produtoestoque">Quantidade Estoque</label>
+            <input
+              type="number"
+              id="produtoestoque"
+              name="qtdEstoque"
+              className="form-control"
+              value={produto.quantidadeEstoque}
+              onChange={(e) => handleChange("quantidadeEstoque", parseFloat(e.target.value))}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="produtoCategoria">Categoria</label>
+            <select id="produtoCategoria" name="categoria" className="form-select"
+              value={produto.categoria} onChange={(e) => handleChange("categoria", e.target.value)}>
+              <option value="">Selecione uma categoria</option>
+              <option value="bebidas">Bebidas</option>
+              <option value="lanches">Lanches</option>
+              <option value="pratos">Pratos</option>
+              <option value="sobremesas">Sobremesas</option>
+              </select>
+          </div>
             <div className="form-group">
               <label htmlFor="produtoImagem">Imagem</label>
               <input

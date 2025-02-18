@@ -45,6 +45,39 @@ import { MdEdit, MdOutlineCancel } from "react-icons/md";
  * 
  * @returns {JSX.Element} The rendered component.
  */
+/**
+ * ProdutoDetailPage component renders the details of a specific product and allows editing, deleting, and image uploading functionalities.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @example
+ * return <ProdutoDetailPage />
+ *
+ * @description
+ * This component fetches the product details based on the product ID from the URL parameters. It provides functionalities to edit the product details, delete the product, upload images, and delete images. It also handles form input changes and manages the component's state.
+ *
+ * @function
+ * @name ProdutoDetailPage
+ *
+ * @requires useParams
+ * @requires useNavigate
+ * @requires useState
+ * @requires useEffect
+ * @requires toast
+ * @requires ToastContainer
+ * @requires FaArrowLeft
+ * @requires FaTrash
+ * @requires FaSave
+ * @requires MdOutlineCancel
+ * @requires MdEdit
+ * @requires getProdutoById
+ * @requires deleteProduto
+ * @requires deleteFile
+ * @requires uploadImg
+ * @requires updateProduto
+ * @requires ImageWithModal
+ */
 const ProdutoDetailPage = () => {
   const { produtoId } = useParams();
   const navigate = useNavigate();
@@ -243,6 +276,60 @@ const ProdutoDetailPage = () => {
             />
           </div>
         </div>
+        <div className="form-group">
+            <div className="input-group mb-3">
+              <div className="input-group-text">
+                <input
+                  className="form-check-input mt-0"
+                  type="checkbox"
+                  aria-label="Checkbox for following text input"
+                  checked={editedProduto.usaEstoque}
+                  disabled={!editing}
+                  onChange={(e) => handleChange("usaEstoque", e.target.checked)}
+                />
+              </div>
+              <input
+                type="text"
+                className="form-control"
+                readOnly
+                aria-label="Text input with checkbox"
+                placeholder="Aplica estoque"
+              />
+            </div>
+        </div>
+
+        <div className="form-group">
+              <label htmlFor="produtoestoque">Quantidade Estoque</label>
+              <input
+                type="number"
+                id="produtoestoque"
+                name="qtdEstoque"
+                className="form-control"
+                value={
+                  editing 
+                  ? editedProduto.quantidadeEstoque
+                  : Number(editedProduto.quantidadeEstoque)
+                }
+                disabled={!editing}
+                onChange={(e) => handleChange("quantidadeEstoque", parseFloat(e.target.value))}
+              />
+          </div>
+        <div className="form-group">
+              <label htmlFor="produtoCategoria">Categoria</label>
+              <select id="produtoCategoria" name="categoria" className="form-select"
+                value={
+                  editing ? editedProduto.categoria 
+                  : editedProduto.categoria
+                } 
+                onChange={(e) => handleChange("categoria", e.target.value)}
+                disabled={!editing}>
+                <option value="">Selecione uma categoria</option>
+                <option value="bebidas">Bebidas</option>
+                <option value="lanches">Lanches</option>
+                <option value="pratos">Pratos</option>
+                <option value="sobremesas">Sobremesas</option>
+                </select>
+            </div>
         {editing && (
           <div className="form-group">
             <label htmlFor="produtoImagem">Imagem</label>

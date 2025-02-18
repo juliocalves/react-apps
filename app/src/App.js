@@ -14,8 +14,22 @@ import ProdutoDetailPage from "./pages/produtos/ProdutoDetailPage";
 import AcessosPage from "./pages/equipe/AcessosPage";
 import ColaboradorPage from "./pages/equipe/ColaboradorPage";
 import ColaboradorDetailPage from "./pages/equipe/ColaboradorDetail";
+import ComandasPage from "./pages/ComandasPage";
 import { menuItems } from "./menuItems";
 
+/**
+ * The main application component that sets up the routing for the app.
+ * It uses React Router for navigation and an AuthProvider for authentication context.
+ * 
+ * Routes:
+ * - "/" and "/auth": AuthPage
+ * - "/cms/*": Layout with CmsPage and AppearancePage
+ * - "/produtos/*": Layout with ProdutoPage, CatalogoPage, and ProdutoDetailPage
+ * - "/clientes/*": Layout with ClientePage, ReservationsPage, and MessagePage
+ * - "/equipe/*": Layout with EquipePage, AcessosPage, ColaboradorPage, and ColaboradorDetailPage
+ * 
+ * @returns {JSX.Element} The main application component with routing.
+ */
 function App() {
   return (
     <Router>
@@ -72,6 +86,13 @@ function App() {
               </Layout>
               } 
           />
+          <Route path="/comandas/*" element={
+              <Layout hideSideMenu={true}>
+                <Routes>
+                  <Route index element={<ComandasPage />} />
+                </Routes>
+              </Layout>
+          }/>
         </Routes>
       </AuthProvider>
     </Router>

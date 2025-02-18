@@ -1,5 +1,13 @@
 import React from "react";
 
+/**
+ * Footer component that displays the brand name, slogan, and copyright information.
+ *
+ * @param {Object} props - The properties object.
+ * @param {string} props.brandName - The name of the brand to display.
+ * @param {string} props.slogan - The slogan of the brand to display.
+ * @returns {JSX.Element} The rendered footer component.
+ */
 const Footer = ({brandName,slogan}) => {
   return (
     <footer className="cms-footer fixed-bottom bg-dark">

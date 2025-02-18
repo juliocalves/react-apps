@@ -1,5 +1,22 @@
 import { useState, useEffect } from "react";
 
+/**
+ * ColaboradorModal component renders a modal for creating or editing a "colaborador" (collaborator).
+ *
+ * @param {Object} props - The component props.
+ * @param {boolean} props.show - Determines whether the modal is visible.
+ * @param {Function} props.onClose - Function to call when the modal is closed.
+ * @param {Function} props.onSave - Function to call when the form is submitted.
+ * @param {Object} [props.colaborador] - The collaborator data to edit. If not provided, the form will be for creating a new collaborator.
+ * @param {string} [props.colaborador.nome] - The name of the collaborator.
+ * @param {string} [props.colaborador.email] - The email of the collaborator.
+ * @param {string} [props.colaborador.cargo] - The position of the collaborator.
+ * @param {string} [props.colaborador.funcao] - The function of the collaborator.
+ * @param {string} [props.colaborador.data] - The creation date of the collaborator.
+ * @param {boolean} [props.colaborador.ativo] - The active status of the collaborator.
+ *
+ * @returns {JSX.Element|null} The rendered modal component or null if `show` is false.
+ */
 const ColaboradorModal = ({ show, onClose, onSave, colaborador }) => {
   const [formData, setFormData] = useState({
     nome: "",

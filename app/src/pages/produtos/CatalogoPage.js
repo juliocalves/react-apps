@@ -60,6 +60,56 @@ import { MdEdit } from "react-icons/md";
  * @property {function} handleImageUpload - Function to handle image upload.
  * @property {function} handleDeleteImage - Function to handle deleting an image.
  */
+/**
+ * CatalogoPage component that displays a list of products with functionalities to search, filter, add, edit, and delete products.
+ * 
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ * 
+ * @example
+ * return (
+ *   <CatalogoPage />
+ * )
+ * 
+ * @typedef {Object} Produto
+ * @property {string} id - The unique identifier of the product.
+ * @property {string} nome - The name of the product.
+ * @property {string} descricao - The description of the product.
+ * @property {number} preco - The price of the product.
+ * @property {number} precoPromocional - The promotional price of the product.
+ * @property {boolean} usaEstoque - Indicates if the product uses stock.
+ * @property {number} quantidadeEstoque - The quantity of the product in stock.
+ * @property {string} categoria - The category of the product.
+ * @property {string[]} imagens - The images of the product.
+ * 
+ * @typedef {Object} Filters
+ * @property {string} nome - The name filter.
+ * @property {string} descricao - The description filter.
+ * @property {string} precoMin - The minimum price filter.
+ * @property {string} precoMax - The maximum price filter.
+ * 
+ * @typedef {Object} HeaderActionsProps
+ * @property {Function} onNew - Function to handle opening the modal for creating a new product.
+ * @property {Function} onSearch - Function to handle searching products.
+ * @property {Function} onFilter - Function to handle toggling the filter section.
+ * @property {Function} onChangeView - Function to handle changing the view mode.
+ * @property {boolean} showSearch - Flag to show or hide the search input.
+ * @property {boolean} showFilter - Flag to show or hide the filter button.
+ * @property {boolean} showAdd - Flag to show or hide the add button.
+ * @property {boolean} showChangeView - Flag to show or hide the change view button.
+ * @property {boolean} isTableView - Flag to indicate if the current view mode is table view.
+ * 
+ * @typedef {Object} ProdutoModalProps
+ * @property {boolean} isOpen - Flag to indicate if the modal is open.
+ * @property {Function} onClose - Function to handle closing the modal.
+ * @property {Function} onSave - Function to handle saving the product.
+ * @property {Produto} produto - The product being edited or created.
+ * @property {Function} handleChange - Function to handle changes in the product fields.
+ * @property {boolean} isSaving - Flag to indicate if the product is being saved.
+ * @property {boolean} isUploading - Flag to indicate if an image is being uploaded.
+ * @property {Function} handleImageUpload - Function to handle image upload.
+ * @property {Function} handleDeleteImage - Function to handle deleting an image.
+ */
 const CatalogoPage = () => {
   const [produtos, setProdutos] = useState([]);
   const [modalAberto, setModalAberto] = useState(false);
@@ -84,7 +134,7 @@ const CatalogoPage = () => {
 
   // Abre o modal para criação de um novo produto
   const handleAbrirModal = () => {
-    setProdutoEditando({ nome: "", descricao: "", preco: 0, precoPromocional:0, imagens: [] });
+    setProdutoEditando({ nome: "", descricao: "", preco: 0, precoPromocional:0,usaEstoque:false,quantidadeEstoque:0, categoria: "", imagens: [] });
     setModalAberto(true);
   };
 
@@ -322,8 +372,10 @@ const CatalogoPage = () => {
             <>
               <th scope="col">Nome</th>
               <th scope="col">Descrição</th>
+              <th scope="col">Categoria</th>
               <th scope="col">Preço</th>
               <th scope="col">Preço Promo</th>
+              <th scope="col">Quantide Estoque</th>
               <th scope="col">Ações</th>
             </>
           }
@@ -333,8 +385,10 @@ const CatalogoPage = () => {
                 <tr key={produto.id} onDoubleClick={() => handleProdutoClick(produto.id)}>
                   <td>{produto.nome}</td>
                   <td>{produto.descricao}</td>
+                  <td>{produto.categoria}</td>
                   <td>R$ {produto.preco.toFixed(2)}</td>
                   <td>R$ {produto.precoPromocional.toFixed(2)}</td>
+                  <td>{produto.quantidadeEstoque}</td>
                   <td>
                     <button
                       className="btn btn-primary btn-sm me-2"

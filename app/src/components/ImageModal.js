@@ -13,6 +13,15 @@ const ImageModal = ({ imageUrl, altText, onClose }) => {
   );
 };
 
+/**
+ * ImageWithModal component renders an image that opens a modal when clicked.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.imageUrl - The URL of the image to display.
+ * @param {string} props.altText - The alt text for the image.
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
 const ImageWithModal = ({ imageUrl, altText }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 

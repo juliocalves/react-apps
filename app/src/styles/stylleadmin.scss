@@ -11,7 +11,8 @@
 @import 'catalogo';
 @import 'product-detail';
 @import 'table';
-
+@import 'mesas';
+@import 'dashboard';
 p, span, h1, h2, h3, h4, h5, h6 {
     color: var(--primary-color); 
     font-size: 0.8rem;
