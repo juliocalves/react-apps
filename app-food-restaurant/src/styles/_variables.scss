@@ -1,0 +1,41 @@
+// Definição das variáveis para o tema claro
+:root {
+    --primary-color: #333;
+    --secondary-color: #f4f4f4;
+    --accent-color: #ff9800;
+    --light-color: #ffffff;
+    --dark-color: #000000;
+    --text-light-color: #ffffff;
+    --text-dark-color: #000000;
+    --sidebar-bg: #181818; /* Sidebar mais visível */
+    --sidebar-hover: #333; /* Melhorando hover */
+    --header-bg: #181818; /* Fundo do cabeçalho */
+    --border-color: #444; /* Bordas visíveis */
+  }
+  
+  [data-theme="dark"] {
+    --primary-color: #f5f5f5; /* Texto principal mais claro */
+    --secondary-color: #121212; /* Fundo principal escuro */
+    --accent-color: #ff9800; /* Mantendo a cor de destaque */
+    --light-color: #ffffff; /* Texto principal mais claro */
+    --dark-color: #e0e0e0; /* Texto secundário mais claro */
+    --sidebar-bg: #181818; /* Sidebar mais visível */
+    --sidebar-hover: #333; /* Melhorando hover */
+    --header-bg: #181818; /* Fundo do cabeçalho */
+    --text-light-color: #000000;
+    --text-dark-color: #ffffff;
+    --border-color: #444; /* Bordas visíveis */
+  }
+  
+  
+$font-primary: 'Arial', sans-serif;
+$font-secondary: 'Helvetica', sans-serif;
+
+// Dimensões
+$sidebar-width: 250px;
+$sidebar-minimized-width: 70px;
+$border-radius: 1rem;
+$transition-speed: 0.3s;
+
+// Sombras
+$box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

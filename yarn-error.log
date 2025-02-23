@@ -1,0 +1,36 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js cache clean
+
+PATH: 
+  C:\Program Files\PowerShell\7;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\Git\cmd;C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\;C:\Users\sirja\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files (x86)\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\DTS\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\PowerShell\7\;C:\Program Files\dotnet\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\PowerShell\7-preview\preview;C:\Program Files\nodejs\;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\sirja\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\sirja\AppData\Local\Programs\Python\Python311\;C:\Users\sirja\AppData\Local\Microsoft\WindowsApps;C:\Users\sirja\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Azure Data Studio\bin;C:\Users\sirja\AppData\Local\Yarn\bin;C:\Users\sirja\.dotnet\tools;C:\Users\sirja\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\sirja\AppData\Local\GitHubDesktop\bin;C:\Users\sirja\AppData\Roaming\npm;c:\Users\sirja\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand
+
+Yarn version: 
+  1.22.18
+
+Node version: 
+  22.13.1
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: UNKNOWN: unknown error, unlink 'C:\Users\sirja\AppData\Local\Yarn\Cache\v6\npm-workbox-precaching-6.5.4-740e3561df92c6726ab5f7471e6aac89582cab72-integrity\node_modules\workbox-precaching\getCacheKeyForURL.mjs'
+
+npm manifest: 
+  {
+    "name": "reserva-app",
+    "version": "1.0.0",
+    "type": "module",
+    "dependencies": {
+      "dotenv": "^16.4.7",
+      "firebase": "^11.3.1",
+      "png-to-ico": "^2.1.8",
+      "sharp": "^0.33.5"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

@@ -89,6 +89,23 @@ export async function getIdentity() {
 /**
  * Função principal: gera os ícones, cria o manifest e salva tudo na pasta informada.
  */
+/**
+ * Generates a web app manifest file.
+ * 
+ * This function performs the following steps:
+ * 1. Prompts the user for the output directory name.
+ * 2. Creates the output directory if it does not exist.
+ * 3. Generates icons in the specified output directory.
+ * 4. Retrieves identity data from Firestore.
+ * 5. Constructs an array of icons and screenshots.
+ * 6. Creates a manifest object using the retrieved identity data or default values.
+ * 7. Converts the manifest object to a formatted JSON string.
+ * 8. Saves the manifest JSON string to a file in the output directory.
+ * 
+ * @async
+ * @function gerarManifest
+ * @returns {Promise<void>} A promise that resolves when the manifest file has been generated and saved.
+ */
 async function gerarManifest() {
   // Solicita o nome da pasta de saída
   const outputDir = await askQuestion("Informe o nome da pasta de saída: ");
