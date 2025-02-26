@@ -1,0 +1,43 @@
+@import 'variables';
+@import 'mixins';
+@import 'auth-page';
+@import 'footer';
+@import 'header';
+p, span, h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color); 
+    font-size: 0.8rem;
+  }
+h1{
+  font-size: 1.3rem;
+}
+h2{
+  font-size: 1rem;
+}
+h3{
+  font-size: 0.8rem;
+}
+li {
+  font-size: 0.8rem;
+}
+
+button{
+  font-size: 0.8rem !important;
+}
+td{
+  font-size: 0.8rem !important;
+}
+th{
+  font-size: 0.8rem !important;
+}
+
+.modal-content{
+  background-color: var(--secondary-color);
+  padding: 2rem;
+  border-radius:$border-radius;
+  box-shadow: $box-shadow;
+}
+textarea,select,input{
+  box-shadow: none !important;
+  font-size: 0.8rem !important;
+}
+

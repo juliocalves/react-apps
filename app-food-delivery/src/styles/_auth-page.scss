@@ -1,0 +1,167 @@
+
+/* Estilos do Container Principal */
+.auth-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--secondary-color);
+  color: var(--secondary-color);
+  font-family: 'Arial', sans-serif;
+  padding: 1rem;
+}
+
+/* Estilos do Card de Autenticação */
+.auth-card {
+  background: var(--primary-color);
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+
+  .brand {
+    margin-bottom: 1.5rem;
+
+    img {
+      max-width: 5rem;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      margin-bottom: 0.5rem;
+      color: var(--accent-color);
+    }
+
+    p {
+      color: var(--secondary-color);
+    }
+  }
+}
+
+/* Estilos do Botão do Google */
+.google-sign-in-button {
+  @include flex-center;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: $border-radius;
+  border: none;
+  cursor: pointer;
+  @include box-shadow;
+  @include transition;
+  width: 100%;
+  &:hover {
+    background-color: var(--accent-color);
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(1);
+  }
+
+  svg {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+  }
+}
+
+/* Estilos Responsivos */
+@media (max-width: 768px) {
+  .auth-card {
+    padding: 1.5rem;
+
+    .brand {
+      h1 {
+        font-size: 1.75rem;
+      }
+
+     
+    }
+  }
+
+  .google-sign-in-button {
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Estilos do Formulário de Login */
+.auth-form {
+  width: 100%;
+  margin-bottom: 1.5rem;
+
+  .form-group {
+    margin-bottom: 1rem;
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--secondary-color);
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--secondary-color);
+      border-radius: $border-radius;
+      background: var(--secondary-color);
+      color: var(--primary-color);
+
+      &:focus {
+        outline: none;
+        border-color: var(--accent-color);
+      }
+    }
+  }
+
+  .error-message {
+    color: #ff0000;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Estilos do Botão de Login com Email */
+.email-sign-in-button {
+  @include flex-center;
+  width: 100%;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  padding: 0.75rem;
+  border-radius: $border-radius;
+  border: none;
+  cursor: pointer;
+  @include box-shadow;
+  @include transition;
+
+  &:hover {
+    background-color: var(--accent-color);
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(1);
+  }
+}
+
+/* Divisor "OU" */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.5rem 0;
+
+  span {
+    padding: 0 1rem;
+    color: var(--secondary-color);
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid var(--secondary-color);
+  }
+}

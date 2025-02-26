@@ -1,0 +1,24 @@
+.admin-main {
+    .admin-container {
+      display: flex;
+      min-height: 100vh;
+      background-color: var(--secondary-color);
+      padding: 5rem 1rem;
+      box-sizing: border-box;
+  
+      @media (max-width: 768px) { // Ajuste para telas menores
+        flex-direction: column-reverse;
+        padding: 3rem 1rem 5rem // Ajuste de padding para melhor espaçamento
+      }
+      .admin-content {
+        flex-grow: 1;
+        padding: 1rem 2rem;
+  
+        @media (max-width: 768px) {
+          padding: 1rem 0; // Reduz o padding no mobile
+          overflow: hidden;
+        }
+      }
+    }
+  }
+  

@@ -1,7 +1,7 @@
 {
   "hosting": {
-    "site": "app-food-restaurante",
     "public": "build",
+    "site": "app-food-restaurante",
     "ignore": [
       "firebase.json",
       "**/.*",

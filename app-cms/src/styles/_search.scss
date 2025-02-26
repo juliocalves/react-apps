@@ -1,0 +1,15 @@
+.search-input{
+    padding-right: 2rem;
+    button{
+        background: transparent;
+        color: var(--light-color);
+        border: none;
+        cursor: pointer;
+        border-radius: $border-radius;
+        @include transition(background-color);
+        
+        &:hover {
+            background: var(--primary-color);
+            }
+    }
+}
